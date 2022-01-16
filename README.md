@@ -1,6 +1,6 @@
 # 技術転換情報
 
-## モダンエンジニアになるまでの流れ
+## モダンエンジニアへの道
 - https://docs.google.com/presentation/d/1cJT-hhNlNq-SFGlPhizejXfNSMBD4hstDt4jO_PCoKQ/edit?usp=sharing
 
 ## モダンチャレンジャ〜技術転換候補者
@@ -16,10 +16,10 @@
 - [学習フォルダ@41期](https://drive.google.com/drive/u/0/folders/1qMwGp39L6IWvZBoF6BsAyAMdNJV1OeiE) 
 - [学習フォルダ@42期以降](https://drive.google.com/drive/u/0/folders/0ABcZ66YhkvFJUk9PVA)
 - [モダンチャレンジについて](https://docs.google.com/presentation/d/1FGMaV7lcAgZH2AbNZsczY4x4ipQDO3y10qklbZOP048/edit?usp=sharing)
-- [技術転換候補者になるためのモダンチャレンジ状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
+- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
-### モダン学習
-- [レディな状態に向けたモダン学習状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
+### 留学準備
+- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ## 技術転換者〜モダンエンジニア
 
