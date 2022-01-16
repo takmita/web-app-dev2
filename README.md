@@ -19,6 +19,7 @@
 - [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ### 留学準備
+- [留学に向けて準備しないといけないコト](https://docs.google.com/document/d/1gWMWWOT1oc92OlKzV-B_pWB44XWQppV_-d-BZrRtL0M/edit?usp=sharing)
 - [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ## 技術転換者〜モダンエンジニア
