@@ -63,5 +63,8 @@
 
 # その他情報
 
+## モダン関連イベント参加状況
+- https://docs.google.com/spreadsheets/d/1D5QsonPehJggw8k0pjhe17jPTPRPXZFexxPtek8bHfk/edit?usp=sharing
+
 ## ITS新入社員教育カリキュラム
 - https://docs.google.com/spreadsheets/d/1b4wyLE-P7hQFh1ZakeEJffkeCIM8sz--I7o_YiMLu6g/edit#gid=1630613457
