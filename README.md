@@ -1,26 +1,29 @@
 # 技術転換情報
 
-## モダンエンジニアへの道
-- https://docs.google.com/presentation/d/1cJT-hhNlNq-SFGlPhizejXfNSMBD4hstDt4jO_PCoKQ/edit?usp=sharing
+## モダンエンジニアになるための流れ
+- [モダンエンジニアへの道](https://docs.google.com/presentation/d/1cJT-hhNlNq-SFGlPhizejXfNSMBD4hstDt4jO_PCoKQ/edit?usp=sharing)
 
 ## モダンチャレンジャ〜技術転換候補者
+
+### モダンチャレンジ
+- [モダンチャレンジについて](https://docs.google.com/document/d/1sOLqXi3MCQUbDF9WrkW-8zWXQmcl23OMIaUbocp0qmo/edit?usp=sharing)
+
+### 留学準備
+- [留学準備について](https://docs.google.com/document/d/1gWMWWOT1oc92OlKzV-B_pWB44XWQppV_-d-BZrRtL0M/edit?usp=sharing)
+
+### 学習フォルダ
+- [学習フォルダ@41期](https://drive.google.com/drive/u/0/folders/1qMwGp39L6IWvZBoF6BsAyAMdNJV1OeiE) 
+- [学習フォルダ@42期以降](https://drive.google.com/drive/u/0/folders/0ABcZ66YhkvFJUk9PVA)
+
+### 学習状況
+- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ### コミュニケーション@Idobata
 - [fd-modern-challenge](https://idobata.io/#/organization/fd/room/fd-modern-challenge)
 
 ### 学習コンテンツ
-- [学習コンテンツについて](https://docs.google.com/document/d/1-rEBSPXpudn53JG_Lf-5BsVkoo2QxpnZNprrIIsJUdU/edit?usp=sharing)
+- [学習コンテンツについて](https://docs.google.com/spreadsheets/d/15njtmCsgODhFG3TSwEB_N-qT0-iwIuoWflLp_v5NPXI/edit?usp=sharing)
 - [学習スケジュール_テンプレート](https://docs.google.com/spreadsheets/d/1ji-aAjG6m9Nnvg7szjUQmHV-zsZpt_auAoCJbVKqCZo/edit?usp=sharing)
-
-### モダンチャレンジ
-- [学習フォルダ@41期](https://drive.google.com/drive/u/0/folders/1qMwGp39L6IWvZBoF6BsAyAMdNJV1OeiE) 
-- [学習フォルダ@42期以降](https://drive.google.com/drive/u/0/folders/0ABcZ66YhkvFJUk9PVA)
-- [モダンチャレンジについて](https://docs.google.com/presentation/d/1FGMaV7lcAgZH2AbNZsczY4x4ipQDO3y10qklbZOP048/edit?usp=sharing)
-- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
-
-### 留学準備
-- [留学に向けて準備しないといけないコト](https://docs.google.com/document/d/1gWMWWOT1oc92OlKzV-B_pWB44XWQppV_-d-BZrRtL0M/edit?usp=sharing)
-- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ## 技術転換者〜モダンエンジニア
 
