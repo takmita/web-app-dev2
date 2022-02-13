@@ -6,7 +6,7 @@
 ## モダンチャレンジャ〜技術転換候補者
 
 ### モダンチャレンジ
-- [モダンチャレンジについて](https://docs.google.com/document/d/1sOLqXi3MCQUbDF9WrkW-8zWXQmcl23OMIaUbocp0qmo/edit?usp=sharing)
+- [モダンチャレンジについて](https://docs.google.com/presentation/d/1FGMaV7lcAgZH2AbNZsczY4x4ipQDO3y10qklbZOP048/edit?usp=sharing)
 
 ### 留学準備
 - [留学準備について](https://docs.google.com/document/d/1gWMWWOT1oc92OlKzV-B_pWB44XWQppV_-d-BZrRtL0M/edit?usp=sharing)
