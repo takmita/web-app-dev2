@@ -1,15 +1,9 @@
 # 技術転換情報
 
-## モダンエンジニアになるための流れ
+## モダンエンジニアになるための全体的な流れ
 - [モダンエンジニアへの道](https://docs.google.com/presentation/d/1cJT-hhNlNq-SFGlPhizejXfNSMBD4hstDt4jO_PCoKQ/edit?usp=sharing)
 
-## モダンチャレンジャ〜技術転換候補者
-
-### モダンチャレンジ
-- [モダンチャレンジについて](https://docs.google.com/presentation/d/1FGMaV7lcAgZH2AbNZsczY4x4ipQDO3y10qklbZOP048/edit?usp=sharing)
-
-### 留学準備
-- [留学準備について](https://docs.google.com/document/d/1gWMWWOT1oc92OlKzV-B_pWB44XWQppV_-d-BZrRtL0M/edit?usp=sharing)
+## 留学前の各種情報
 
 ### 学習フォルダ
 - [学習フォルダ@41期](https://drive.google.com/drive/u/0/folders/1qMwGp39L6IWvZBoF6BsAyAMdNJV1OeiE) 
@@ -21,11 +15,12 @@
 ### コミュニケーション@Idobata
 - [fd-modern-challenge](https://idobata.io/#/organization/fd/room/fd-modern-challenge)
 
-### 学習コンテンツ
-- [学習コンテンツについて](https://docs.google.com/spreadsheets/d/15njtmCsgODhFG3TSwEB_N-qT0-iwIuoWflLp_v5NPXI/edit?usp=sharing)
+### モダンカリキュラム
+- [スキル面カリキュラム](https://docs.google.com/spreadsheets/d/15njtmCsgODhFG3TSwEB_N-qT0-iwIuoWflLp_v5NPXI/edit?usp=sharing)
+- [マインド面カリキュラム](https://docs.google.com/spreadsheets/d/1Jkz-43CWY_7l72POo_0Pc-cod1Tdm1OqJxEwJAKrmVc/edit?usp=sharing)
 - [学習スケジュール_テンプレート](https://docs.google.com/spreadsheets/d/1ji-aAjG6m9Nnvg7szjUQmHV-zsZpt_auAoCJbVKqCZo/edit?usp=sharing)
 
-## 技術転換者〜モダンエンジニア
+## 留学以降の各種情報
 
 ### コミュニケーション@Idobata
 - [fd-modern-dx-commu](https://idobata.io/#/organization/fd/room/fd-modern-dx-commu)
