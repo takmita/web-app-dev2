@@ -19,7 +19,7 @@
 |  UNIX/Linux入門  |  unix_linux  |
 |  npm  |  npm  |
 |  スッキリわかるSQL入門  |  sql  |
-|  JavaScript Primer第一部：基礎文法  |  javascript_primer  |
 |  Webアプリケーション開発  |  web_application  |
+|  TypeScript  |  typescript  |
 |  Webを支える技術  |  web_knowledge  |
 |  アジャイル動画  |  agile  |
