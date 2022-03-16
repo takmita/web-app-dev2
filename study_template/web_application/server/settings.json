@@ -1,6 +1,6 @@
 {
-  "dbAddress": "ana-gasproject-dev:asia-northeast1:ana-project-dev",
-  "user": "asy",
-  "pwd": "dragile",
-  "db": "crew_smart"
+  "dbAddress": "esm-gcp-study:us-central1:modern-study",
+  "user": "esm",
+  "pwd": "esm",
+  "db": "book_management"
 }
