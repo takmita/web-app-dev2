@@ -3,32 +3,18 @@
 ## モダンエンジニアになるための全体的な流れ
 - [モダンエンジニアへの道](https://docs.google.com/presentation/d/1cJT-hhNlNq-SFGlPhizejXfNSMBD4hstDt4jO_PCoKQ/edit?usp=sharing)
 
-## 留学前の各種情報
-
 ### 学習フォルダ
 - [学習フォルダ@41期](https://drive.google.com/drive/u/0/folders/1qMwGp39L6IWvZBoF6BsAyAMdNJV1OeiE) 
 - [学習フォルダ@42期以降](https://drive.google.com/drive/u/0/folders/0ABcZ66YhkvFJUk9PVA)
 
 ### 学習状況
-- [モダンチャレンジ・留学準備状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
-
-### コミュニケーション@Idobata
-- [fd-modern-challenge](https://idobata.io/#/organization/fd/room/fd-modern-challenge)
+- [チャレンジャーの学習状況サマリー](https://docs.google.com/spreadsheets/d/1VEgibQc-pAnlCZaYIv9VoWOMahq2WRImBpO_-Jgvtaw/edit?usp=sharing)
 
 ### モダンカリキュラム
 - [スキル面カリキュラム](https://docs.google.com/spreadsheets/d/15njtmCsgODhFG3TSwEB_N-qT0-iwIuoWflLp_v5NPXI/edit?usp=sharing)
 - [マインド面カリキュラム](https://docs.google.com/spreadsheets/d/1Jkz-43CWY_7l72POo_0Pc-cod1Tdm1OqJxEwJAKrmVc/edit?usp=sharing)
+- [モダンチェックについて](https://docs.google.com/document/d/1ggqnW_cnbeb6p0KLCFqINRBpCDdDVSI9DP9jEgxqaNM/edit?usp=sharing)
 - [学習スケジュール_テンプレート](https://docs.google.com/spreadsheets/d/1ji-aAjG6m9Nnvg7szjUQmHV-zsZpt_auAoCJbVKqCZo/edit?usp=sharing)
-
-## 留学以降の各種情報
-
-### コミュニケーション@Idobata
-- [fd-modern-dx-commu](https://idobata.io/#/organization/fd/room/fd-modern-dx-commu)
-
-### 情報共有@miro
-- [おすすめの本の共有](https://miro.com/app/board/o9J_kmib1L8=/?moveToWidget=3074457357965560279&cot=14)
-- [モダン人が経験した技術の共有](https://miro.com/app/board/o9J_kmib1L8=/?moveToWidget=3074457358544190086&cot=14)
-- [お好きに共有するスペース](https://miro.com/app/board/o9J_kmib1L8=/?moveToWidget=3074457359284648039&cot=14)
 
 ## 現在のモダン界隈メンバー
 
@@ -45,7 +31,7 @@
 |  09  |  豊岡 久実  |  -  |  ✔︎  |  -  |  -  |    |
 |  10  |  三田村 岳周  |  -  |  ✔︎  |  -  |  -  |    |
 |  11  |  見澤 久美子  |  -  |  ✔︎  |  -  |  -  |    |
-|  12  |  森竹 理加  |  -  |  -  |  ✔︎  |  -  |    |
+|  12  |  森竹 理加  |  -  |  ✔︎  |  -  |  -  |    |
 |  13  |  宮川 正和  |  -  |  -  |  -  |  ✔︎  |    |
 |  14  |  嶋田 久美子  |  -  |  -  |  -  |  ✔︎  |    |
 |  15  |  横山 宏明  |  -  |  -  |  -  |  ✔︎  |    |
