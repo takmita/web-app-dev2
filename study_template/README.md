@@ -18,7 +18,6 @@
 |  サル先生のGit入門  |  github  |
 |  UNIX/Linux入門  |  unix_linux  |
 |  npm  |  npm  |
-|  スッキリわかるSQL入門  |  sql  |
 |  Webアプリケーション開発  |  web_application  |
 |  TypeScript  |  typescript  |
 |  Webを支える技術  |  web_knowledge  |
