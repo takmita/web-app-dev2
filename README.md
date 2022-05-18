@@ -1,3 +1,5 @@
+
+-----
 # 技術転換情報
 
 ## モダンエンジニアになるための全体的な流れ
@@ -42,7 +44,27 @@
 
 *1 役割的に調整に時間が必要そう
 
+-----
+# チャレンジャー学習で利用可能なCloudSQL@GCP関連情報
+## プロジェクト情報
+- プロジェクト名: ESM-GCP-STUDY
+- プロジェクトID: esm-gcp-study
+- URL: https://console.cloud.google.com/home/dashboard?project=esm-gcp-study&hl=ja&orgonly=true&supportedpurview=organizationId
 
+## 紐付くオーナー情報
+- アカウントID: fd-learning@esm.co.jp
+- パスワード: fd-learning1101
+- 支払先カード: 山川宏賢の社用カード
+
+## インスタンスをCLIで起動・停止する方法
+1. `gcloud config list` を実行する
+2. account = h-yamakawa@esm.co.jp or fd-learning@esm.co.jp じゃない場合は `gcloud auth login` を実行する
+3. project = esm-gcp-study じゃない場合は `gcloud config set project esm-gcp-study` を実行する
+4. いずれかを実行する
+  - 起動する場合は `gcloud sql instances patch modern-study --activation-policy=ALWAYS` を実行する
+  - 停止する場合は `gcloud sql instances patch modern-study --activation-policy=NEVER` を実行する
+
+-----
 # その他情報
 
 ## モダン関連イベント参加状況
