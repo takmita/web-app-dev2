@@ -143,7 +143,7 @@ function selectUpdateSheetData_ (name) {
   const mySheetValues = mySheet.getDataRange().getValues()
 
   // データがなかったら処理終了する
-  if (mySheetValues.length > 1 && mySheetValues[0].length > 1) {
+  if (!(mySheetValues.length > 1 || mySheetValues[0].length > 1)) {
     return {
       name: mySheet.getName(),
       lastTimeDate: null,
