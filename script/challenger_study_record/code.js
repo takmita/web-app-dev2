@@ -140,21 +140,31 @@ function selectChallengerData_ () {
 function selectUpdateSheetData_ (name) {
   // 開いているシートとシート名を取得する
   const mySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name)
-
-  // 更新する範囲を特定する
   const mySheetValues = mySheet.getDataRange().getValues()
-  const updateNumRow = 1
+
+  // データがなかったら処理終了する
+  if (mySheetValues.length > 1 && mySheetValues[0].length > 1) {
+    return {
+      name: mySheet.getName(),
+      lastTimeDate: null,
+      thisTimeDate: null,
+      lastTimeRange: null,
+      thisTimeRange: null
+    }
+  }
+
+  // 更新する学習記録範囲を特定する
+  const updateRowNum = 1
   const updateRow = mySheetValues.findIndex(row => row[0] > new Date())
   const updateColumn = 2 // 計画的な学習達成数から
-  const updateNumColumn = mySheetValues[0].length - 3 // 実績残り課題数まで
+  const updateNumColumn = mySheetValues[0].length - 6 // 実績残り課題数まで
 
-  const existData = mySheetValues.length > 1 && mySheetValues[0].length > 1
   return {
     name: mySheet.getName(),
-    lastTimeDate: existData ? mySheetValues[updateRow - 2][0] : null,
-    thisTimeDate: existData ? mySheetValues[updateRow - 1][0] : null,
-    lastTimeRange: existData ? mySheet.getRange(updateRow - 1, updateColumn, updateNumRow, updateNumColumn) : null,
-    thisTimeRange: existData ? mySheet.getRange(updateRow, updateColumn, updateNumRow, updateNumColumn) : null
+    lastTimeDate: mySheetValues[updateRow - 2][0],
+    thisTimeDate: mySheetValues[updateRow - 1][0],
+    lastTimeRange: mySheet.getRange(updateRow - 1, updateColumn, updateRowNum, updateNumColumn),
+    thisTimeRange: mySheet.getRange(updateRow, updateColumn, updateRowNum, updateNumColumn)
   }
 }
 
