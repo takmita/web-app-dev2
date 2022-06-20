@@ -4,6 +4,7 @@ const REFERENCE_SHEET = {
   ORIGINAL_STUDY: 'カリキュラム外学習数まとめ',
   MEET: '集いまとめ',
   PROGRESS: '進捗率まとめ',
+  PROGRESS_VOLUME: '進捗率まとめ（ボリューム）',
   SETTING: '環境設定シート'
 }
 
@@ -177,6 +178,7 @@ function updateChallengerRecord_ ({ name, githubUserId, slackUserId, lastTimeDat
   const originalStudyData = selectOriginalStudyData_(name)
   const meetData = selectMeetData_(name)
   const progressData = selectProgressData_(name)
+  const progressVolumeData = selectProgressVolumeData_(name)
 
   // Slackからメッセージを取得する範囲（タイムスタンプ）を取得する
   const oldestTS = String(lastTimeDate.getTime() / 1000) // FROM: 前回更新対象日の0時0分0秒　ミリ秒→秒
@@ -205,7 +207,7 @@ function updateChallengerRecord_ ({ name, githubUserId, slackUserId, lastTimeDat
   updateThisTimeValues[0][12] = Number(progressData.typescript)// TypeScript	
   updateThisTimeValues[0][13] = Number(progressData.webBasic)// WebBasic
   updateThisTimeValues[0][14] = Number(progressData.agileBasic)// AgileBasic
-  updateThisTimeValues[0][15] = Number(progressData.resultPoint)// 実績残り課題数
+  updateThisTimeValues[0][15] = Number(progressVolumeData.resultPoint)// 実績残り課題数
 
   // 更新データをスプレッドシートに反映する
   thisTimeRange.setValues(updateThisTimeValues)
@@ -218,7 +220,7 @@ function selectAsPlannedData_ (myName) {
   const asPlannedSheetValues = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(REFERENCE_SHEET.AS_PLANNED).getDataRange().getValues()
   const myData = asPlannedSheetValues.filter(row => row[0] === myName)
   return {
-    studyPlanning: myData[0][11] // '平均ポイント'
+    studyPlanning: myData[0][12] // '平均ポイント'
   }
 }
 
@@ -253,14 +255,24 @@ function selectProgressData_ (myName) {
   const myData = progressSheetValues.filter(row => row[0] === myName)
   return {
     gasEdu: myData[0][1], // GAS-EDU
-    github: myData[0][2], // GitHub
-    unixLinux: myData[0][3], // UNIX/Linux
-    npm: myData[0][4], // npm
-    webApp: myData[0][5], // Webアプリ開発
-    typescript: myData[0][6], // TypeScript
-    webBasic: myData[0][7], // Webを支える技術
-    agileBasic: myData[0][8], // アジャイル動画
-    resultPoint: myData[0][10] // 残数
+    github: myData[0][2] + myData[0][3], // GitHub, GIT-EDUのどちらか1つしかやらないため
+    unixLinux: myData[0][4], // UNIX/Linux
+    npm: myData[0][5], // npm
+    webApp: myData[0][6], // Webアプリ開発
+    typescript: myData[0][7], // TypeScript
+    webBasic: myData[0][8], // Webを支える技術
+    agileBasic: myData[0][9], // アジャイル動画
+  }
+}
+
+/**
+ * 進捗率まとめ（ボリューム）シートから指定されたチャレンジャー名に紐づくデータを取得する
+ */
+ function selectProgressVolumeData_ (myName) {
+  const progressSheetValues = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(REFERENCE_SHEET.PROGRESS_VOLUME).getDataRange().getValues()
+  const myData = progressSheetValues.filter(row => row[0] === myName)
+  return {
+    resultPoint: myData[0][11] // 残数
   }
 }
 
