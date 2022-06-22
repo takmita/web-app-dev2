@@ -66,7 +66,8 @@ function updateChallengerRecordTrigger () {
     }
 
     // team_modern_studyチャンネルに完了メッセージを投稿する
-    let message = "チャレンジャーの学習記録を更新したよっ\n"
+    let message = "<!channel> \n\n"
+    message += "チャレンジャーの学習記録を更新したよっ\n"
     message += "みんな見てみてね :baby_chick:\n"
     message += "\n"
     message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
