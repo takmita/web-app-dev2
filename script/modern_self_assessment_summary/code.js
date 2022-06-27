@@ -29,50 +29,41 @@ function onOpen () {
  * トリガーで実行する関数
  * 全てのチャレンジャーシートの該当日付データにモダン自己評価を貼り付ける
  */
-function updateSelfAssessmentRecordTrigger () {
+function updateSelfAssessmentRecordTrigger() {
+  let challengerData = []
   try {
     // 環境設定シートからデータを取得する
-    const challengerData = selectChallengerData_()
+    challengerData = selectChallengerData_()
+  } catch {
+    // team_modern_studyチャンネルにエラーメッセージを投稿して、処理終了する
+    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
+    message += "エラーになった処理: selectChallengerData\n"
+    notifySlack_(message)
 
-    // challengerDataを元に各チャレンジャーごとにシートを更新する
-    let errorMessage = ''
-    for (challenger of challengerData) {
+    return
+  }
+    
+  // challengerDataを元に各チャレンジャーごとにシートを更新する
+  const digestMessages = []
+  const errorMessages = []
+  for (challenger of challengerData) {
+    try {
       // 更新対象シートの諸々のデータを取得する
       const updateSheetData = selectUpdateSheetData_(challenger.name)
 
-      // 開いているシートが各チャレンジャーシート以外の場合は処理を終了する
-      if (!challengerData.some(challennger => challennger.name === updateSheetData.name)) {
-        throw new Error(`チャレンジャーシート以外のシートで処理が実行されました シート名: ${challenger.name}`)
-      }
-
       // 更新対象シートを更新する
-      try {
-        updateSelfAssessmentRecord_({ ...challenger, ...updateSheetData })
-      } catch (e) {
-        errorMessage += e + "\n"
-      }
+      const digestMessage = updateSelfAssessmentRecord_({ ...challenger, ...updateSheetData })
+
+      digestMessages.push(`${challenger.name}さん：　${digestMessage}`)
+    } catch (e) {
+      errorMessages.push(`${challenger.name}さん：　${e}`)
     }
-
-    // team_modern_studyチャンネルに完了メッセージを投稿する
-    let message = "<!channel> \n"
-    message += "モダン自己評価を学習記録に更新したよっ\n"
-    message += "みんな見てみてね :baby_chick:\n"
-    message += "\n"
-    message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
-
-    if (errorMessage) {
-      message += "\n"
-      message += "----------\n"
-      message += errorMessage
-    }
-
-    notifySlack_(message)
-  } catch {
-    // team_modern_studyチャンネルにエラーメッセージを投稿する
-    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
-    message += "エラーになったシート名: " + challenger.name + "\n"
-    notifySlack_(message)
   }
+
+  // team_modern_studyチャンネルに完了メッセージを投稿する
+  const message = makeSelfAssessmentCompleteMessage_(digestMessages, errorMessages)
+  console.log(message)
+  // notifySlack_(message)
 }
 
 /**
@@ -80,49 +71,40 @@ function updateSelfAssessmentRecordTrigger () {
  * 全てのチャレンジャーシートの該当日付データに中間ふりかえりを貼り付ける
  */
  function updateMidtermReviewRecordTrigger () {
+  let challengerData = []
   try {
     // 環境設定シートからデータを取得する
-    const challengerData = selectChallengerData_()
+    challengerData = selectChallengerData_()
+  } catch {
+    // team_modern_studyチャンネルにエラーメッセージを投稿して、処理終了する
+    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
+    message += "エラーになった処理: selectChallengerData\n"
+    notifySlack_(message)
 
-    // challengerDataを元に各チャレンジャーごとにシートを更新する
-    let errorMessage = ''
-    for (challenger of challengerData) {
+    return
+  }
+    
+  // challengerDataを元に各チャレンジャーごとにシートを更新する
+  const digestMessages = []
+  const errorMessages = []
+  for (challenger of challengerData) {
+    try {
       // 更新対象シートの諸々のデータを取得する
       const updateSheetData = selectUpdateSheetData_(challenger.name)
 
-      // 開いているシートが各チャレンジャーシート以外の場合は処理を終了する
-      if (!challengerData.some(challennger => challennger.name === updateSheetData.name)) {
-        throw new Error(`チャレンジャーシート以外のシートで処理が実行されました シート名: ${challenger.name}`)
-      }
-
       // 更新対象シートを更新する
-      try {
-        updateMidtermReviewRecord_({ ...challenger, ...updateSheetData })
-      } catch (e) {
-        errorMessage += e + "\n"
-      }
+      const digestMessage = updateMidtermReviewRecord_({ ...challenger, ...updateSheetData })
+
+      digestMessages.push(`${challenger.name}さん：　${digestMessage}`)
+    } catch (e) {
+      errorMessages.push(`${challenger.name}さん：　${e}`)
     }
-
-    // team_modern_studyチャンネルに完了メッセージを投稿する
-    let message = "<!channel> \n"
-    message += "モダン自己評価の中間ふりかえりを学習記録に更新したよっ\n"
-    message += "みんな見てみてね :baby_chick:\n"
-    message += "\n"
-    message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
-
-    if (errorMessage) {
-      message += "\n"
-      message += "----------\n"
-      message += errorMessage
-    }
-
-    notifySlack_(message)
-  } catch {
-    // team_modern_studyチャンネルにエラーメッセージを投稿する
-    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
-    message += "エラーになったシート名: " + challenger.name
-    notifySlack_(message)
   }
+
+  // team_modern_studyチャンネルに完了メッセージを投稿する
+  const message = makeMidtermReviewCompleteMessage_(digestMessages, errorMessages)
+  console.log(message)
+  // notifySlack_(message)
 }
 
 /**
@@ -278,7 +260,7 @@ function calcUpdateRowThisTime_ (mySheet) {
 /**
  * 更新対象シートを更新する（モダン自己評価）
  */
-function updateSelfAssessmentRecord_ ({ name, email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange }) {
+function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange }) {
   const today = new Date()
   const searchStartDate = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0)
   const searchEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59)
@@ -288,7 +270,7 @@ function updateSelfAssessmentRecord_ ({ name, email, thisTimeRange, learnEagerne
 
   // 該当データがない場合はエラーをスローする
   if (!selfAssessmentData) {
-    throw new Error(`${name} さんは回答中です`)
+    throw new Error('回答中です')
   }
 
   // 更新データを作成する
@@ -317,6 +299,9 @@ function updateSelfAssessmentRecord_ ({ name, email, thisTimeRange, learnEagerne
   harmonyReasonRange.setValue(selfAssessmentData.harmonyReason) // 協調性評価理由
   strengthenElementRange.setValue(selfAssessmentData.strengthenElement) // 改善・強化マインド要素
   strengthenActionRange.setValue(selfAssessmentData.strengthenAction) // 改善・強化tryAction
+
+  // ダイジェストメッセージとして改善・強化tryActionを返す
+  return makeDigestMessage_(selfAssessmentData.strengthenAction)
 }
 
 /**
@@ -337,6 +322,9 @@ function updateSelfAssessmentRecord_ ({ name, email, thisTimeRange, learnEagerne
    
   // 更新データをスプレッドシートに反映する
   midtermReviewRange.setValue(midtermReviewData.midtermReview) // 中間ふりかえり
+
+  // ダイジェストメッセージとして改善・強化tryActionを返す
+  return makeDigestMessage_(midtermReviewData.midtermReview)
 }
 
 /**
@@ -382,6 +370,50 @@ function selectMidtermReviewData_ (myEmail, searchStartDate, searchEndDate) {
     : {
       midtermReview: myData[latestIndex][2], //中間ふりかえり
     }
+}
+
+function makeSelfAssessmentCompleteMessage_ (digestMessages, errorMessages) {
+  let message = "<!channel> \n"
+  message += "モダン自己評価を学習記録に更新したよっ\n"
+
+  if (digestMessages.length) {
+    message += "\n" + digestMessages.join("\n") + "\n"
+  }
+
+  message += "\n"
+  message += "詳しくはコチラを見てね :baby_chick:\n"
+  message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
+
+  if (errorMessages.length) {
+    message += "\n----------\n"
+    message += errorMessages.join("\n")
+  }
+
+  return message
+}
+
+function makeMidtermReviewCompleteMessage_ (digestMessages, errorMessages) {
+  let message = "<!channel> \n"
+  message += "モダン自己評価の中間ふりかえりを学習記録に更新したよっ\n"
+
+  if (digestMessages.length) {
+    message += "\n" + digestMessages.join("\n") + "\n"
+  }
+
+  message += "\n"
+  message += "詳しくはコチラを見てね :baby_chick:\n"
+  message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
+
+  if (errorMessages.length) {
+    message += "\n----------\n"
+    message += errorMessages.join("\n")
+  }
+
+  return message
+}
+
+function makeDigestMessage_ (message) {
+  return message.replace(/\r?\n/g, ' ').substring(0, 13) + '...'
 }
 
 /**

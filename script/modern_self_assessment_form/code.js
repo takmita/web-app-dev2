@@ -8,7 +8,7 @@ const POST_ICON = ':hatching_chick:'
  */
 function sendSelfAssessmentForm1Trigger() {
   const FUNC_NAME = 'sendSelfAssessmentForm1Trigger'
-  let message = "<!channel> \n\n"
+  let message = "<!subteam^S03B8LSN7KP> \n\n"
   message += "毎月恒例の自己評価アンケート（自己評価編）だよっ :baby_chick: \n"
   message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
   message += "難しそうでしたら、お気軽にご連絡ください。 \n"
@@ -34,7 +34,7 @@ function sendSelfAssessmentForm1Trigger() {
  */
 function sendSelfAssessmentForm2Trigger () {
   const FUNC_NAME = 'sendSelfAssessmentForm2Trigger'
-  let message = "<!channel> \n\n"
+  let message = "<!subteam^S03B8LSN7KP> \n\n"
   message += "毎月恒例の自己評価アンケート（中間ふりかえり編）だよっ :baby_chick: \n"
   message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
   message += "難しそうでしたら、お気軽にご連絡ください。 \n"
