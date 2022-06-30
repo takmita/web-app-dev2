@@ -293,7 +293,7 @@ function selectGithubStudyCommitData_ (githubUserId, oldestTS, latestTS) {
   return {
     num: messages
       .filter(message => message.bot_profile?.name === "GitHub")
-      .filter(message => message.attachments[0].fallback.includes(`by ${githubUserId}`))
+      .filter(message => message.attachments?.[0].fallback.includes(`by ${githubUserId}`))
       .length
   }
 }
@@ -339,8 +339,8 @@ function selectGithubReportPostData_ (githubUserId, oldestTS, latestTS) {
   return {
     num: messages
       .filter(message => message.bot_profile?.name === "GitHub")
-      .filter(message => message.attachments[0].pretext.startsWith("New issue created") || message.attachments[0].pretext.startsWith("New comment on issue"))
-      .filter(message => message.attachments[0].pretext.includes(githubUserId))
+      .filter(message => message.attachments?.[0].pretext.startsWith("New issue created") || message.attachments?.[0].pretext.startsWith("New comment on issue"))
+      .filter(message => message.attachments?.[0].pretext.includes(githubUserId))
       .length
   }
 }
