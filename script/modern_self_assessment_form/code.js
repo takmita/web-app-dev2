@@ -80,19 +80,20 @@ function calcLastBusinessNextDate(date){
   const calJa = CalendarApp.getCalendarById('ja.japanese#holiday@group.v.calendar.google.com')
  
   // 最終営業日に月末日を代入し、曜日・祝日該当を判定していく
+  let businessNextDate = new Date(date)
   for (let i = 1; i < 30; i++) {
     // 月末日の曜日を判定して平日かつ祝日に該当しない場合は最終営業日とする。
     // getDay()メソッド：日曜日を0として土曜日6まで数値を返す
-    const dayOWeek = date.getDay()
+    const dayOWeek = businessNextDate.getDay()
  
     // 条件分岐で日曜日・土曜日・日本の祝日の該当日であった場合は1日翌日にずらす
-    if (dayOWeek == 0 || dayOWeek == 6 || calJa.getEventsForDay(date).length > 0) {
-      date = new Date(today.getFullYear(), today.getMonth() + 2, 1 * i)
+    if (dayOWeek == 0 || dayOWeek == 6 || calJa.getEventsForDay(businessNextDate).length > 0) {
+      businessNextDate.setDate(businessNextDate.getDate() + 1);
       continue
     }
     break
   }
-  return date //例：Mon May 31 2021 00:00:00 GMT+0900 (Japan Standard Time)
+  return businessNextDate //例：Mon May 31 2021 00:00:00 GMT+0900 (Japan Standard Time)
 }
 
 /**
