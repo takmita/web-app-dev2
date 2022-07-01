@@ -21,7 +21,7 @@ function sendSelfAssessmentForm1Trigger() {
 
   // 次回トリガーの設定日を求める
   const tempDay = new Date()
-  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 14)
+  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 1)
   triggerDate = calcLastBusinessNextDate(triggerDate)
   triggerDate.setHours(8)
   triggerDate.setMinutes(30)
@@ -47,7 +47,7 @@ function sendSelfAssessmentForm2Trigger () {
 
   // 次回トリガーの設定日を求める
   const tempDay = new Date()
-  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 1)
+  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 14)
   triggerDate = calcLastBusinessNextDate(triggerDate)
   triggerDate.setHours(8)
   triggerDate.setMinutes(30)
