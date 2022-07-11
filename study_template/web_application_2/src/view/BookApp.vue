@@ -1,6 +1,6 @@
 <template>
   <div>
-    書籍一覧を表示するよ
+    書籍管理アプリだよ
   </div>
 </template>
 

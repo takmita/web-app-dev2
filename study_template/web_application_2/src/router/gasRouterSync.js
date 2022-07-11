@@ -6,7 +6,7 @@ export const sync = router => {
   window.google.script.url.getLocation(location => {
     const path = location.hash
     const query = location.parameter
-    router.replace({ path, query })
+    router.replace({ path, query }, () => {})
   })
 
   router.afterEach(route => {

@@ -11,7 +11,7 @@
     </v-app-bar>
     <v-main>
       <v-container fluid>
-        <books />
+        <book-app />
       </v-container>
     </v-main>
   </v-app>
@@ -19,11 +19,11 @@
 
 <script lang="js">
 import Vue from 'vue'
-import Books from '@/components/Books'
+import BookApp from '@/view/BookApp'
 
 export default Vue.extend({
   components: {
-    Books
+    BookApp
   },
   data () {
     return {}

@@ -9,9 +9,7 @@ const routes = [
     redirect: '/'
   },
   {
-    // Books画面
-    path: '/',
-    name: 'Books'
+    path: '/'
   }
 ]
 
