@@ -62,8 +62,7 @@ function updateSelfAssessmentRecordTrigger() {
 
   // team_modern_studyチャンネルに完了メッセージを投稿する
   const message = makeSelfAssessmentCompleteMessage_(digestMessages, errorMessages)
-  console.log(message)
-  // notifySlack_(message)
+  notifySlack_(message)
 }
 
 /**
@@ -103,8 +102,7 @@ function updateSelfAssessmentRecordTrigger() {
 
   // team_modern_studyチャンネルに完了メッセージを投稿する
   const message = makeMidtermReviewCompleteMessage_(digestMessages, errorMessages)
-  console.log(message)
-  // notifySlack_(message)
+  notifySlack_(message)
 }
 
 /**
