@@ -109,7 +109,7 @@ function updateChallengerRecordOperation () {
     return pre
   }, 0)
   if (alreadySetValueNum > 0) {
-    Browser.msgBox('すでに何か値が設定されていそうなので、\\n更新したいならA列、R列、S列だけ値を設定している状態にしてください。')
+    Browser.msgBox('すでに何か値が設定されていそうなので、\\n更新したいならB列からN列は未入力状態にしてください。')
     return
   }
 
