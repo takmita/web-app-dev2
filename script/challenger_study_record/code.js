@@ -205,10 +205,7 @@ function updateChallengerRecord_ ({ name, githubUserId, slackUserId, lastTimeDat
   updateThisTimeValues[0][9] = Number(progressData.unixLinux)// UNIX/Linux
   updateThisTimeValues[0][10] = Number(progressData.npm)// npm
   updateThisTimeValues[0][11] = Number(progressData.webApp)// WebApp
-  updateThisTimeValues[0][12] = Number(progressData.typescript)// TypeScript	
-  updateThisTimeValues[0][13] = Number(progressData.webBasic)// WebBasic
-  updateThisTimeValues[0][14] = Number(progressData.agileBasic)// AgileBasic
-  updateThisTimeValues[0][15] = Number(progressVolumeData.resultPoint)// 実績残り課題数
+  updateThisTimeValues[0][12] = Number(progressVolumeData.resultPoint)// 実績残り課題数
 
   // 更新データをスプレッドシートに反映する
   thisTimeRange.setValues(updateThisTimeValues)
@@ -221,7 +218,7 @@ function selectAsPlannedData_ (myName) {
   const asPlannedSheetValues = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(REFERENCE_SHEET.AS_PLANNED).getDataRange().getValues()
   const myData = asPlannedSheetValues.filter(row => row[0] === myName)
   return {
-    studyPlanning: myData[0][12] // '平均ポイント'
+    studyPlanning: myData[0][9] // '平均ポイント'
   }
 }
 
@@ -260,9 +257,6 @@ function selectProgressData_ (myName) {
     unixLinux: myData[0][4], // UNIX/Linux
     npm: myData[0][5], // npm
     webApp: myData[0][6], // Webアプリ開発
-    typescript: myData[0][7], // TypeScript
-    webBasic: myData[0][8], // Webを支える技術
-    agileBasic: myData[0][9], // アジャイル動画
   }
 }
 
@@ -273,7 +267,7 @@ function selectProgressData_ (myName) {
   const progressSheetValues = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(REFERENCE_SHEET.PROGRESS_VOLUME).getDataRange().getValues()
   const myData = progressSheetValues.filter(row => row[0] === myName)
   return {
-    resultPoint: myData[0][11] // 残数
+    resultPoint: myData[0][8] // 残数
   }
 }
 
