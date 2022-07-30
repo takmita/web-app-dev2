@@ -19,9 +19,9 @@ const POST_ICON = ':hatching_chick:'
 function onOpen () {
   SpreadsheetApp
     .getActiveSpreadsheet()
-    .addMenu("カスタムメニュー", [
-      {name: "今開いてるシートのモダン自己評価記録を更新する", functionName: "updateSelfAssessmentRecordOperation"},
-      {name: "今開いてるシートの中間ふりかえり記録を更新する", functionName: "updateMidtermReviewRecordOperation"}
+    .addMenu('カスタムメニュー', [
+      {name: '今開いてるシートのモダン自己評価記録を更新する', functionName: 'updateSelfAssessmentRecordOperation'},
+      {name: '今開いてるシートの中間ふりかえり記録を更新する', functionName: 'updateMidtermReviewRecordOperation'}
     ])
 }
 
@@ -36,8 +36,8 @@ function updateSelfAssessmentRecordTrigger() {
     challengerData = selectChallengerData_()
   } catch {
     // team_modern_studyチャンネルにエラーメッセージを投稿して、処理終了する
-    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
-    message += "エラーになった処理: selectChallengerData\n"
+    let message = 'モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n'
+    message += 'エラーになった処理: selectChallengerData\n'
     notifySlack_(message)
 
     return
@@ -76,8 +76,8 @@ function updateSelfAssessmentRecordTrigger() {
     challengerData = selectChallengerData_()
   } catch {
     // team_modern_studyチャンネルにエラーメッセージを投稿して、処理終了する
-    let message = "モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n"
-    message += "エラーになった処理: selectChallengerData\n"
+    let message = 'モダン自己評価を更新しようとしたらエラーが発生したよっ :cry:\n'
+    message += 'エラーになった処理: selectChallengerData\n'
     notifySlack_(message)
 
     return
@@ -273,7 +273,7 @@ function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReas
 
   // 更新データを作成する
   const updateThisTimeValues =  thisTimeRange.getValues()
-  updateThisTimeValues[0][0] = Utilities.formatDate(searchStartDate, "JST", "yyyy/MM/dd") // 年月
+  updateThisTimeValues[0][0] = Utilities.formatDate(searchStartDate, 'JST', 'yyyy/MM/dd') // 年月
   updateThisTimeValues[0][1] = Number(selfAssessmentData.learnEagernessPoint) // 学習意欲評価
   updateThisTimeValues[0][2] = '' // 学習意欲評価理由
   updateThisTimeValues[0][3] = Number(selfAssessmentData.openPoint) // オープン評価
@@ -371,40 +371,40 @@ function selectMidtermReviewData_ (myEmail, searchStartDate, searchEndDate) {
 }
 
 function makeSelfAssessmentCompleteMessage_ (digestMessages, errorMessages) {
-  let message = "<!channel> \n"
-  message += "モダン自己評価を学習記録に更新したよっ\n"
+  let message = '<!channel> \n'
+  message += 'モダン自己評価を学習記録に更新したよっ\n'
 
   if (digestMessages.length) {
-    message += "\n" + digestMessages.join("\n") + "\n"
+    message += '\n' + digestMessages.join('\n') + '\n'
   }
 
-  message += "\n"
-  message += "詳しくはコチラを見てね :baby_chick:\n"
-  message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
+  message += '\n'
+  message += '詳しくはコチラを見てね :baby_chick:\n'
+  message += 'https://datastudio.google.com/s/rdVaSsI1-8o\n'
 
   if (errorMessages.length) {
-    message += "\n----------\n"
-    message += errorMessages.join("\n")
+    message += '\n----------\n'
+    message += errorMessages.join('\n')
   }
 
   return message
 }
 
 function makeMidtermReviewCompleteMessage_ (digestMessages, errorMessages) {
-  let message = "<!channel> \n"
-  message += "モダン自己評価の中間ふりかえりを学習記録に更新したよっ\n"
+  let message = '<!channel> \n'
+  message += 'モダン自己評価の中間ふりかえりを学習記録に更新したよっ\n'
 
   if (digestMessages.length) {
-    message += "\n" + digestMessages.join("\n") + "\n"
+    message += '\n' + digestMessages.join('\n') + '\n'
   }
 
-  message += "\n"
-  message += "詳しくはコチラを見てね :baby_chick:\n"
-  message += "https://datastudio.google.com/s/rdVaSsI1-8o\n"
+  message += '\n'
+  message += '詳しくはコチラを見てね :baby_chick:\n'
+  message += 'https://datastudio.google.com/s/rdVaSsI1-8o\n'
 
   if (errorMessages.length) {
-    message += "\n----------\n"
-    message += errorMessages.join("\n")
+    message += '\n----------\n'
+    message += errorMessages.join('\n')
   }
 
   return message
@@ -419,12 +419,12 @@ function makeDigestMessage_ (message) {
  */
 function notifySlack_ (message) {
     const options = {
-      "method": "post",
-      "contentType": "application/json",
-      "payload": JSON.stringify({
-        "username": POST_USER_NAME,
-        "icon_emoji": POST_ICON,
-        "text": message
+      'method': 'post',
+      'contentType': 'application/json',
+      'payload': JSON.stringify({
+        'username': POST_USER_NAME,
+        'icon_emoji': POST_ICON,
+        'text': message
       })
     }
 
