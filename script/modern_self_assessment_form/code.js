@@ -1,3 +1,8 @@
+// 参照先スプレッドシート
+const SELF_ASSESSMENT_ID = '1SwLS5Lx0Ia6k6nIkwjhWwmR3rLdEKwiFNs70teXgeIU'
+const FORM_SHEET_NAME = 'フォームの回答 1'
+const SETTING_SHEET_NAME = '環境設定シート'
+
 // メッセージ投稿情報
 const POST_URL = 'https://hooks.slack.com/services/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'
 const POST_USER_NAME = 'ひよこちゃん'
@@ -13,16 +18,14 @@ function sendSelfAssessmentForm1Trigger() {
   message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
   message += "難しそうでしたら、お気軽にご連絡ください。 \n"
   message += "\n"
-  message += "https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform\n"
+  message += "https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n"
 
   notifySlack_(message)
 
-  deleteTrigger(FUNC_NAME)
-
-  // 次回トリガーの設定日を求める
-  const triggerDate = makeTriggerDate(1, 8, 30)
-  
-  setTrigger(FUNC_NAME, triggerDate)
+  // 次回トリガーのを設定する
+  const triggerDate = makeTriggerDate_(1, 8, 30)
+  deleteTrigger_(FUNC_NAME)
+  setTrigger_(FUNC_NAME, triggerDate)
 }
 
 /**
@@ -35,16 +38,49 @@ function sendSelfAssessmentForm2Trigger () {
   message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
   message += "難しそうでしたら、お気軽にご連絡ください。 \n"
   message += "\n"
-  message += "https://docs.google.com/forms/d/e/1FAIpQLSfwxDJbjoeumHBdvMiFNWVZoxbJqqTdOHWSPPGQCjIjHUDutw/viewform\n"
+  message += "https://docs.google.com/forms/d/e/1FAIpQLSfwxDJbjoeumHBdvMiFNWVZoxbJqqTdOHWSPPGQCjIjHUDutw/viewform \n"
   
+  // 自己評価アンケート（自己評価編）の今月の回答状況を取得して、未回答者はメッセージを追加する
+  const responseStatus = selectSelfAssessmentResponseStatus_(new Date())
+  if (responseStatus.noAnswers.length) {
+    message += "\n"
+    message += "---------- \n"
+    message += `自己評価アンケート（自己評価編）の回答がまだの方: ${responseStatus.noAnswers.map(answer => answer + 'さん').join(', ')} \n`
+    message += "下記URLからご回答よろしくお願いしますピヨ \n"
+    message += "https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n"
+  }
+
+  console.log(message)
+
   notifySlack_(message)
 
-  deleteTrigger(FUNC_NAME)
+  // 次回トリガーのを設定する
+  const triggerDate = makeTriggerDate_(14, 8, 30)
+  deleteTrigger_(FUNC_NAME)
+  setTrigger_(FUNC_NAME, triggerDate)
+}
 
-  // 次回トリガーの設定日を求める
-  const triggerDate = makeTriggerDate(14, 8, 30)
+/**
+ * 自己評価アンケート（自己評価編）の回答状況を返す
+ */
+function selectSelfAssessmentResponseStatus_(targetDate) {
+  // 回答データと環境設定データを取得し、それぞれヘッダーを取り除く
+  const spreadSheet = SpreadsheetApp.openById(SELF_ASSESSMENT_ID)
+  const formValues = spreadSheet.getSheetByName(FORM_SHEET_NAME).getDataRange().getValues()
+  const settingValues = spreadSheet.getSheetByName(SETTING_SHEET_NAME).getDataRange().getValues()
+  formValues.shift()
+  settingValues.shift()
 
-  setTrigger(FUNC_NAME, triggerDate)
+  const targetResponses = formValues.filter(value =>
+    value[0].getFullYear() === targetDate.getFullYear() && value[0].getMonth() === targetDate.getMonth()
+  )
+
+  return settingValues.reduce((previousValue, currentValue) => {
+    const isAnswer = targetResponses.some(response => response[1] === currentValue[1])
+    const pushTo = isAnswer ? previousValue.answers : previousValue.noAnswers
+    pushTo.push(currentValue[0])
+    return previousValue
+  }, { answers: [], noAnswers: [] })
 }
 
 /**
@@ -67,9 +103,9 @@ function notifySlack_ (message) {
 /**
  * 翌月の指定した日付（休日の場合、翌営業日）、時間のDateオブジェクトを返す
  */
-function makeTriggerDate(day, hour, minute){
+function makeTriggerDate_(day, hour, minute){
   const tempDay = new Date()
-  const triggerDate = calcLastBusinessNextDate(new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, day))
+  const triggerDate = calcLastBusinessNextDate_(new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, day))
   triggerDate.setHours(hour)
   triggerDate.setMinutes(minute)
 
@@ -79,7 +115,7 @@ function makeTriggerDate(day, hour, minute){
 /**
  * 指定した日の翌営業日を算出する
  */
-function calcLastBusinessNextDate(date){
+function calcLastBusinessNextDate_(date){
   // 日本の祝日カレンダーを取得
   const calJa = CalendarApp.getCalendarById('ja.japanese#holiday@group.v.calendar.google.com')
  
@@ -103,14 +139,14 @@ function calcLastBusinessNextDate(date){
 /**
  * トリガーを設定する
  */
-function setTrigger(func, triggerDate) {
+function setTrigger_(func, triggerDate) {
   ScriptApp.newTrigger(func).timeBased().at(triggerDate).create()
 }
 
 /**
  * トリガーを削除する
  */
-function deleteTrigger(func) {
+function deleteTrigger_(func) {
   // このプロジェクトで設定しているトリガーを配列で取得する
   const triggers = ScriptApp.getProjectTriggers();
   
