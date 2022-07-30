@@ -20,11 +20,7 @@ function sendSelfAssessmentForm1Trigger() {
   deleteTrigger(FUNC_NAME)
 
   // 次回トリガーの設定日を求める
-  const tempDay = new Date()
-  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 1)
-  triggerDate = calcLastBusinessNextDate(triggerDate)
-  triggerDate.setHours(8)
-  triggerDate.setMinutes(30)
+  const triggerDate = makeTriggerDate(1, 8, 30)
   
   setTrigger(FUNC_NAME, triggerDate)
 }
@@ -46,11 +42,7 @@ function sendSelfAssessmentForm2Trigger () {
   deleteTrigger(FUNC_NAME)
 
   // 次回トリガーの設定日を求める
-  const tempDay = new Date()
-  let triggerDate = new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, 14)
-  triggerDate = calcLastBusinessNextDate(triggerDate)
-  triggerDate.setHours(8)
-  triggerDate.setMinutes(30)
+  const triggerDate = makeTriggerDate(14, 8, 30)
 
   setTrigger(FUNC_NAME, triggerDate)
 }
@@ -70,6 +62,18 @@ function notifySlack_ (message) {
     }
 
     UrlFetchApp.fetch(POST_URL, options)
+}
+
+/**
+ * 翌月の指定した日付（休日の場合、翌営業日）、時間のDateオブジェクトを返す
+ */
+function makeTriggerDate(day, hour, minute){
+  const tempDay = new Date()
+  const triggerDate = calcLastBusinessNextDate(new Date(tempDay.getFullYear(), tempDay.getMonth() + 1, day))
+  triggerDate.setHours(hour)
+  triggerDate.setMinutes(minute)
+
+  return triggerDate
 }
 
 /**
