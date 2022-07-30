@@ -50,8 +50,6 @@ function sendSelfAssessmentForm2Trigger () {
     message += 'https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n'
   }
 
-  console.log(message)
-
   notifySlack_(message)
 
   // 次回トリガーのを設定する
