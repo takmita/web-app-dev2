@@ -13,12 +13,12 @@ const POST_ICON = ':hatching_chick:'
  */
 function sendSelfAssessmentForm1Trigger() {
   const FUNC_NAME = 'sendSelfAssessmentForm1Trigger'
-  let message = "<!subteam^S03B8LSN7KP> \n\n"
-  message += "毎月恒例の自己評価アンケート（自己評価編）だよっ :baby_chick: \n"
-  message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
-  message += "難しそうでしたら、お気軽にご連絡ください。 \n"
-  message += "\n"
-  message += "https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n"
+  let message = '<!subteam^S03B8LSN7KP> \n\n'
+  message += '毎月恒例の自己評価アンケート（自己評価編）だよっ :baby_chick: \n'
+  message += 'なるべく1週間以内に回答よろしくお願いしますピヨ \n'
+  message += '難しそうでしたら、お気軽にご連絡ください。 \n'
+  message += '\n'
+  message += 'https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n'
 
   notifySlack_(message)
 
@@ -33,21 +33,21 @@ function sendSelfAssessmentForm1Trigger() {
  */
 function sendSelfAssessmentForm2Trigger () {
   const FUNC_NAME = 'sendSelfAssessmentForm2Trigger'
-  let message = "<!subteam^S03B8LSN7KP> \n\n"
-  message += "毎月恒例の自己評価アンケート（中間ふりかえり編）だよっ :baby_chick: \n"
-  message += "なるべく1週間以内に回答よろしくお願いしますピヨ \n"
-  message += "難しそうでしたら、お気軽にご連絡ください。 \n"
-  message += "\n"
-  message += "https://docs.google.com/forms/d/e/1FAIpQLSfwxDJbjoeumHBdvMiFNWVZoxbJqqTdOHWSPPGQCjIjHUDutw/viewform \n"
+  let message = '<!subteam^S03B8LSN7KP> \n\n'
+  message += '毎月恒例の自己評価アンケート（中間ふりかえり編）だよっ :baby_chick: \n'
+  message += 'なるべく1週間以内に回答よろしくお願いしますピヨ \n'
+  message += '難しそうでしたら、お気軽にご連絡ください。 \n'
+  message += '\n'
+  message += 'https://docs.google.com/forms/d/e/1FAIpQLSfwxDJbjoeumHBdvMiFNWVZoxbJqqTdOHWSPPGQCjIjHUDutw/viewform \n'
   
   // 自己評価アンケート（自己評価編）の今月の回答状況を取得して、未回答者はメッセージを追加する
   const responseStatus = selectSelfAssessmentResponseStatus_(new Date())
   if (responseStatus.noAnswers.length) {
-    message += "\n"
-    message += "---------- \n"
+    message += '\n'
+    message += '---------- \n'
     message += `自己評価アンケート（自己評価編）の回答がまだの方: ${responseStatus.noAnswers.map(answer => answer + 'さん').join(', ')} \n`
-    message += "下記URLからご回答よろしくお願いしますピヨ \n"
-    message += "https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n"
+    message += '下記URLからご回答よろしくお願いしますピヨ \n'
+    message += 'https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n'
   }
 
   console.log(message)
@@ -88,12 +88,12 @@ function selectSelfAssessmentResponseStatus_(targetDate) {
  */
 function notifySlack_ (message) {
     const options = {
-      "method": "post",
-      "contentType": "application/json",
-      "payload": JSON.stringify({
-        "username": POST_USER_NAME,
-        "icon_emoji": POST_ICON,
-        "text": message
+      'method': 'post',
+      'contentType': 'application/json',
+      'payload': JSON.stringify({
+        'username': POST_USER_NAME,
+        'icon_emoji': POST_ICON,
+        'text': message
       })
     }
 
