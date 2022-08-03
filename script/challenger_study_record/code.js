@@ -5,6 +5,7 @@ const REFERENCE_SHEET = {
   MEET: '集いまとめ',
   PROGRESS: '進捗率まとめ',
   PROGRESS_VOLUME: '進捗率まとめ（ボリューム）',
+  WEBAPP2_STATUS: 'Webアプリ開発2状況まとめ',
   SETTING: '環境設定シート'
 }
 
@@ -63,6 +64,12 @@ function updateChallengerRecordTrigger () {
       const githubUserId = challenger.githubUserId
       const slackUserId = challenger.slackUserId
       updateChallengerRecord_({ ...updateSheetData, githubUserId, slackUserId })
+
+      // Webアプリ開発2の学習記録更新対象者の場合のみ更新する
+      if (challenger.isWebapp2 === 'true') {
+        const updateWebapp2SheetData = selectUpdateWebapp2SheetData_(challenger.name)
+        updateWebapp2Record_(updateWebapp2SheetData)
+      }
     }
 
     // team_modern_studyチャンネルに完了メッセージを投稿する
@@ -84,7 +91,7 @@ function updateChallengerRecordTrigger () {
  * スプレッドシートを開いて実行する関数
  * 1つのチャレンジャーシートの該当日付データに集計したデータを貼り付ける
  */
-function updateChallengerRecordOperation () {
+function updateChallengerRecordOperation() {
   // 環境設定シートからデータを取得する
   const challengerData = selectChallengerData_()
 
@@ -117,6 +124,13 @@ function updateChallengerRecordOperation () {
   const githubUserId = challengerData.find(challenger => challenger.name === updateSheetData.name).githubUserId
   const slackUserId = challengerData.find(challenger => challenger.name === updateSheetData.name).slackUserId
   updateChallengerRecord_({ ...updateSheetData, githubUserId, slackUserId })
+
+  // Webアプリ開発2の学習記録更新対象者の場合のみ更新する
+  const isWebapp2 = challengerData.find(challenger => challenger.name === updateSheetData.name).isWebapp2
+  if (isWebapp2) {
+    const updateWebapp2SheetData = selectUpdateWebapp2SheetData_(updateSheetData.name)
+    updateWebapp2Record_(updateWebapp2SheetData)
+  }
 }
 
 /**
@@ -131,7 +145,8 @@ function selectChallengerData_ () {
     return {
       name: setting[0],
       githubUserId: setting[1],
-      slackUserId: setting[2]
+      slackUserId: setting[2],
+      isWebapp2: setting[3]
     }
   })
 }
@@ -166,6 +181,34 @@ function selectUpdateSheetData_ (name) {
     lastTimeDate: mySheetValues[updateRow - 2][0],
     thisTimeDate: mySheetValues[updateRow - 1][0],
     lastTimeRange: mySheet.getRange(updateRow - 1, updateColumn, updateRowNum, updateNumColumn),
+    thisTimeRange: mySheet.getRange(updateRow, updateColumn, updateRowNum, updateNumColumn)
+  }
+}
+
+/**
+ * Webアプリ開発2の更新対象シートの諸々のデータを取得する
+ */
+function selectUpdateWebapp2SheetData_(name) {
+  // 開いているシートとシート名を取得する
+  const mySheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(`${name}_Web2`)
+  const mySheetValues = mySheet.getDataRange().getValues()
+
+  // データがなかったら処理終了する
+  if (!(mySheetValues.length > 1 || mySheetValues[0].length > 1)) {
+    return {
+      name,
+      thisTimeRange: null
+    }
+  }
+
+  // 更新する学習記録範囲を特定する
+  const updateRowNum = 1
+  const updateRow = mySheetValues.findIndex(row => row[0] > new Date())
+  const updateColumn = 2 // 進捗率から
+  const updateNumColumn = mySheetValues[0].length - 6 // 実績残り課題数まで
+
+  return {
+    name,
     thisTimeRange: mySheet.getRange(updateRow, updateColumn, updateRowNum, updateNumColumn)
   }
 }
@@ -206,6 +249,22 @@ function updateChallengerRecord_ ({ name, githubUserId, slackUserId, lastTimeDat
   updateThisTimeValues[0][10] = Number(progressData.npm)// npm
   updateThisTimeValues[0][11] = Number(progressData.webApp)// WebApp
   updateThisTimeValues[0][12] = Number(progressVolumeData.resultPoint)// 実績残り課題数
+
+  // 更新データをスプレッドシートに反映する
+  thisTimeRange.setValues(updateThisTimeValues)
+}
+
+/**
+ * Webアプリ開発2の更新対象シートを更新する
+ */
+function updateWebapp2Record_({ name, thisTimeRange }) {
+  // 各種シートからチャレンジャー名に紐づくデータを取得する
+  const webapp2StatusData = selectWebapp2Status_(name)
+
+  // 更新データを作成する
+  const updateThisTimeValues = thisTimeRange.getValues()
+  updateThisTimeValues[0][0] = Number(webapp2StatusData.progress) // 進捗率
+  updateThisTimeValues[0][1] = Number(webapp2StatusData.resultPoint) // 実績残り課題数
 
   // 更新データをスプレッドシートに反映する
   thisTimeRange.setValues(updateThisTimeValues)
@@ -268,6 +327,19 @@ function selectProgressData_ (myName) {
   const myData = progressSheetValues.filter(row => row[0] === myName)
   return {
     resultPoint: myData[0][8] // 残数
+  }
+ }
+
+
+/**
+ * 進捗率まとめ（ボリューム）シートから指定されたチャレンジャー名に紐づくデータを取得する
+ */
+ function selectWebapp2Status_ (myName) {
+  const webapp2StatusSheetValues = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(REFERENCE_SHEET.WEBAPP2_STATUS).getDataRange().getValues()
+  const myData = webapp2StatusSheetValues.filter(row => row[0] === myName)
+  return {
+    progress: myData[0][5], // 進捗率
+    resultPoint: myData[0][6] // 残ボリューム
   }
 }
 
