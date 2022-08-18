@@ -162,7 +162,7 @@ function calcUpdateRowThisTime_ (mySheet) {
 /**
  * 更新対象シートを更新する（モダン自己評価）
  */
-function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange }) {
+function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange }) {
   const today = new Date()
   const searchStartDate = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0)
   const searchEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59)
