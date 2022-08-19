@@ -66,7 +66,7 @@ function updateChallengerRecordTrigger () {
       updateChallengerRecord_({ ...updateSheetData, githubUserId, slackUserId })
 
       // Webアプリ開発2の学習記録更新対象者の場合のみ更新する
-      if (challenger.isWebapp2 === 'true') {
+      if (challenger.isWebapp2) {
         const updateWebapp2SheetData = selectUpdateWebapp2SheetData_(challenger.name)
         updateWebapp2Record_(updateWebapp2SheetData)
       }
