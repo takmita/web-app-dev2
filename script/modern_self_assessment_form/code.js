@@ -4,9 +4,7 @@ const FORM_SHEET_NAME = 'フォームの回答 1'
 const SETTING_SHEET_NAME = '環境設定シート'
 
 // メッセージ投稿情報
-const POST_URL = 'https://hooks.slack.com/services/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'
-const POST_USER_NAME = 'ひよこちゃん'
-const POST_ICON = ':hatching_chick:'
+const POST_URL = 'https://hooks.slack.com/services/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'
 
 /**
  * 月初の自己評価アンケート（自己評価編）を送信するトリガー関数
@@ -89,8 +87,6 @@ function notifySlack_ (message) {
       'method': 'post',
       'contentType': 'application/json',
       'payload': JSON.stringify({
-        'username': POST_USER_NAME,
-        'icon_emoji': POST_ICON,
         'text': message
       })
     }

@@ -11,14 +11,12 @@ const REFERENCE_SHEET = {
 
 //Slack関連情報
 // メッセージ取得情報
-const ESM_FD_TOKEN = "xoxp-3063994713959-3085250832484-3202076027827-b75ff50fd70955db913bb48eb2dac89b"
-const NOTIFY_MODERN_STUDY_CHANNEL_ID = "C034KT9TL6R"
-const TEAM_MODERN_STUDY_CHANNEL_ID = "C034FNV5TKQ"
-const NOTIFY_MODERN_DX_CHANNEL_ID = "C034N754JRZ"
+const ESM_FD_TOKEN = "xoxp-3963306992470-4007513038819-4119166819828-1fcf363207500ce1e830678cbecfaf40"
+const NOTIFY_MODERN_STUDY_CHANNEL_ID = "C042NE3A2NS"
+const TEAM_MODERN_STUDY_CHANNEL_ID = "C042V2TBNTC"
+const NOTIFY_MODERN_DX_CHANNEL_ID = "C042V2T9GLA"
 // メッセージ投稿情報
-const POST_URL = 'https://hooks.slack.com/services/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'
-const POST_USER_NAME = 'ひよこちゃん'
-const POST_ICON = ':hatching_chick:'
+const POST_URL = 'https://hooks.slack.com/services/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'
 
 /**
  * スプレッドシートを開いた時に起動する関数
@@ -459,8 +457,6 @@ function notifySlack_ (message) {
       "method": "post",
       "contentType": "application/json",
       "payload": JSON.stringify({
-        "username": POST_USER_NAME,
-        "icon_emoji": POST_ICON,
         "text": message
       })
     }
