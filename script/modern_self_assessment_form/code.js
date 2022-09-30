@@ -4,23 +4,68 @@ const FORM_SHEET_NAME = 'フォームの回答 1'
 const SETTING_SHEET_NAME = '環境設定シート'
 
 // メッセージ投稿情報
-const POST_URL = 'https://hooks.slack.com/services/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'
+const POST_URL = 'https://hooks.slack.com/services/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' // 本番用（#team-fd-modern-study）
+// const POST_URL = 'https://hooks.slack.com/services/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' // テスト用（マイチャンネル）
 
 /**
  * 月初の自己評価アンケート（自己評価編）を送信するトリガー関数
  */
 function sendSelfAssessmentForm1Trigger() {
-  const FUNC_NAME = 'sendSelfAssessmentForm1Trigger'
-  let message = '<!subteam^S03B8LSN7KP> \n\n'
-  message += '毎月恒例の自己評価アンケート（自己評価編）だよっ :baby_chick: \n'
-  message += 'なるべく1週間以内に回答よろしくお願いしますピヨ \n'
-  message += '難しそうでしたら、お気軽にご連絡ください。 \n'
-  message += '\n'
-  message += 'https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n'
+  const prependBlocks = [
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: FORM1_MESSAGE // message.jsに定義
+			}
+		},
+		{
+			type: 'divider'
+    },
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: '*参考: 前回のモダン自己評価結果*'
+			}
+		}
+  ]
 
-  notifySlack_(message)
+  // 前回の自己評価結果を取得して、メッセージに追加する
+  const date = new Date()
+  const lastMonth = new Date(date.getFullYear(), date.getMonth()-1, date.getDate())
+  const responses = selectSelfAssessmentResponseStatus_(lastMonth)
+  const middleBlocks = responses.map(response => (
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+        text: response.answered
+          ? `${response.name}さん \n`
+            + `学習意欲 ${response.content.studyEagerness} | `
+            + `オープン ${response.content.openness} | `
+            + `言語力 ${response.content.language} | `
+            + `主体性 ${response.content.initiative} | `
+            + `協調性 ${response.content.cooperativeness}`
+          : `${response.name}さん \n未回答です`
+			}
+		}
+  ))
+
+  const appendBlocks = [
+    {
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+        "text": "※ 前回のモダン自己評価とモダンチェックの詳細は<https://datastudio.google.com/s/rdVaSsI1-8o|モダン学習記録>をご確認ください"
+			}
+		}
+  ]
+
+  notifySlack_([...prependBlocks, ...middleBlocks, ...appendBlocks])
 
   // 次回トリガーのを設定する
+  const FUNC_NAME = 'sendSelfAssessmentForm1Trigger'
   const triggerDate = makeTriggerDate_(1, 8, 30)
   deleteTrigger_(FUNC_NAME)
   setTrigger_(FUNC_NAME, triggerDate)
@@ -29,35 +74,64 @@ function sendSelfAssessmentForm1Trigger() {
 /**
  * 月中の自己評価アンケート（中間ふりかえり編）を送信するトリガー関数
  */
-function sendSelfAssessmentForm2Trigger () {
-  const FUNC_NAME = 'sendSelfAssessmentForm2Trigger'
-  let message = '<!subteam^S03B8LSN7KP> \n\n'
-  message += '毎月恒例の自己評価アンケート（中間ふりかえり編）だよっ :baby_chick: \n'
-  message += 'なるべく1週間以内に回答よろしくお願いしますピヨ \n'
-  message += '難しそうでしたら、お気軽にご連絡ください。 \n'
-  message += '\n'
-  message += 'https://docs.google.com/forms/d/e/1FAIpQLSfwxDJbjoeumHBdvMiFNWVZoxbJqqTdOHWSPPGQCjIjHUDutw/viewform \n'
-  
+function sendSelfAssessmentForm2Trigger() {
+  const prependBlocks = [
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: FORM2_MESSAGE // message.jsに定義
+			}
+		},
+		{
+			type: 'divider'
+    },
+		{
+			type: 'section',
+			text: {
+				type: 'mrkdwn',
+				text: '*今月のモダン自己評価がまだの方*'
+			}
+		}
+  ]
+
   // 自己評価アンケート（自己評価編）の今月の回答状況を取得して、未回答者はメッセージを追加する
-  const responseStatus = selectSelfAssessmentResponseStatus_(new Date())
-  if (responseStatus.noAnswers.length) {
-    message += '\n'
-    message += '---------- \n'
-    message += `自己評価アンケート（自己評価編）の回答がまだの方: ${responseStatus.noAnswers.map(answer => answer + 'さん').join(', ')} \n`
-    message += '下記URLからご回答よろしくお願いしますピヨ \n'
-    message += 'https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform \n'
-  }
+  const thisMonth = new Date()
+  const responses = selectSelfAssessmentResponseStatus_(thisMonth)
+  const noAnswer = responses.filter(response => !response.answered).map(response => response.name + 'さん').join(', ')
+  const middleBlocks = [
+    {
+			type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: noAnswer
+          ? noAnswer + '\n<https://docs.google.com/forms/d/e/1FAIpQLSeOWzS1CjajE0oUiJhuBUGckALA6vHLF37_ZeFZHd20uNqNoQ/viewform|こちらをクリックして>ご回答ください \n'
+          : 'なし'
+      }
+		}
+  ]
 
-  notifySlack_(message)
+  const appendBlocks = [
+    {
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+        "text": "※ ご自身で設定した改善・強化TryActionの詳細は<https://datastudio.google.com/s/rdVaSsI1-8o|モダン学習記録>をご確認ください"
+			}
+		}
+  ]
 
+  notifySlack_([...prependBlocks, ...middleBlocks, ...appendBlocks])
+  
   // 次回トリガーのを設定する
+  const FUNC_NAME = 'sendSelfAssessmentForm2Trigger'
   const triggerDate = makeTriggerDate_(14, 8, 30)
   deleteTrigger_(FUNC_NAME)
   setTrigger_(FUNC_NAME, triggerDate)
 }
 
 /**
- * 自己評価アンケート（自己評価編）の回答状況を返す
+ * 指定された年月の自己評価アンケート（自己評価編）の回答状況を返す
  */
 function selectSelfAssessmentResponseStatus_(targetDate) {
   // 回答データと環境設定データを取得し、それぞれヘッダーを取り除く
@@ -71,23 +145,42 @@ function selectSelfAssessmentResponseStatus_(targetDate) {
     value[0].getFullYear() === targetDate.getFullYear() && value[0].getMonth() === targetDate.getMonth()
   )
 
-  return settingValues.reduce((previousValue, currentValue) => {
-    const isAnswer = targetResponses.some(response => response[1] === currentValue[1])
-    const pushTo = isAnswer ? previousValue.answers : previousValue.noAnswers
-    pushTo.push(currentValue[0])
-    return previousValue
-  }, { answers: [], noAnswers: [] })
+  return settingValues.map(value => {
+    const result = {
+      name: value[0],
+      answered: false,
+      content: {
+        studyEagerness: '', // 学習意欲
+        openness: '', // オープン
+        language: '', // 言語力
+        initiative: '', // 主体性
+        cooperativeness: '' // 協調性
+      }
+    }
+
+    const response = targetResponses.find(response => response[1] === value[1])
+    if (response) {
+      result.answered = true
+      result.content.studyEagerness = response[2]
+      result.content.openness = response[4]
+      result.content.language = response[6]
+      result.content.initiative = response[8]
+      result.content.cooperativeness = response[10]
+    }
+
+    return result
+  })
 }
 
 /**
  * Slackにメッセージを送信する
  */
-function notifySlack_ (message) {
+function notifySlack_ (blocks) {
     const options = {
       'method': 'post',
       'contentType': 'application/json',
       'payload': JSON.stringify({
-        'text': message
+        'blocks': blocks
       })
     }
 
