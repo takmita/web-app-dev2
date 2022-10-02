@@ -75,7 +75,7 @@ function updateSelfAssessmentRecordOperation () {
 
   // 更新対象の確認ダイアログを表示する
   const updateRow = updateSheetData.thisTimeRange.getRow()
-  if (Browser.msgBox(`${updateRow} 行目のデータを更新しますが、更新対象合ってますか？`, Browser.Buttons.OK_CANCEL) === 'cancel') {
+  if (Browser.msgBox(`${updateRow} 行目のデータを更新しますが、更新対象合ってますか（毎月1日は特別処理を実行します）？`, Browser.Buttons.OK_CANCEL) === 'cancel') {
     return
   }
 
@@ -125,7 +125,8 @@ function selectUpdateSheetData_ (name) {
       harmonyReasonRange: null,
       strengthenElementRange: null,
       strengthenActionRange: null,
-      midtermReviewRange: null
+      midtermReviewRange: null,
+      lasTimeRange: null
     }
   }
 
@@ -146,7 +147,8 @@ function selectUpdateSheetData_ (name) {
     harmonyReasonRange: mySheet.getRange(updateRowFirstTime, 12),
     strengthenElementRange: mySheet.getRange(updateRowFirstTime, 13),
     strengthenActionRange: mySheet.getRange(updateRowFirstTime, 14),
-    midtermReviewRange: mySheet.getRange(updateRowFirstTime, 16)
+    midtermReviewRange: mySheet.getRange(updateRowFirstTime, 16),
+    lasTimeRange: mySheet.getRange(updateRowFirstTime, 17, 1, 12)
   }
 }
 
@@ -162,7 +164,20 @@ function calcUpdateRowThisTime_ (mySheet) {
 /**
  * 更新対象シートを更新する（モダン自己評価）
  */
-function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange }) {
+function updateSelfAssessmentRecord_ ({ email, thisTimeRange, lasTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange }) {
+  const today = new Date()
+  if (today.getDate() === 1) {
+    // 月初のモダン自己評価依頼がslackに流れる前に前回エリアに退避し、クリアする
+    updateLastTimeArea_(email, lasTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange)
+  } else {
+    updateThisTimeArea_(email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange)
+  }
+}
+
+/**
+ * 今月エリアに最新の自己評価結果を更新する 
+ */
+function updateThisTimeArea_ (email, thisTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange) {
   const today = new Date()
   const searchStartDate = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0)
   const searchEndDate = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59)
@@ -208,6 +223,46 @@ function updateSelfAssessmentRecord_ ({ email, thisTimeRange, learnEagernessReas
   if (midtermReviewData) {
     midtermReviewRange.setValue(midtermReviewData.midtermReview) // 中間ふりかえり
   }
+}
+
+/**
+ * 前回エリアに自己評価結果を退避する 
+ */
+ function updateLastTimeArea_ (email, lasTimeRange, learnEagernessReasonRange, openReasonRange, competenceReasonRange, subjectiveReasonRange, harmonyReasonRange, strengthenElementRange, strengthenActionRange, midtermReviewRange) {
+  const today = new Date()
+  const searchStartDate = new Date(today.getFullYear(), today.getMonth() - 1, 1, 0, 0, 0)
+  const searchEndDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59)
+
+  // 各種シートからチャレンジャー名に紐づくデータを取得する
+  const selfAssessmentData = selectSelfAssessmentData_(email, searchStartDate, searchEndDate)
+
+  // 更新データを作成する
+  const updateThisTimeValues = lasTimeRange.getValues()
+  if (selfAssessmentData) {
+    updateThisTimeValues[0][0] = Number(selfAssessmentData.learnEagernessPoint) // 学習意欲評価
+    updateThisTimeValues[0][1] = selfAssessmentData.learnEagernessReason // 学習意欲評価理由
+    updateThisTimeValues[0][2] = Number(selfAssessmentData.openPoint) // オープン評価
+    updateThisTimeValues[0][3] = selfAssessmentData.openReason // オープン評価理由
+    updateThisTimeValues[0][4] = Number(selfAssessmentData.competencePoint) // 言語力評価
+    updateThisTimeValues[0][5] = selfAssessmentData.competenceReason // 言語力評価理由
+    updateThisTimeValues[0][6] = Number(selfAssessmentData.subjectivePoint) // 主体性評価
+    updateThisTimeValues[0][7] = selfAssessmentData.subjectiveReason // 主体性評価理由
+    updateThisTimeValues[0][8] = Number(selfAssessmentData.harmonyPoint) // 協調性評価
+    updateThisTimeValues[0][9] = selfAssessmentData.harmonyReason // 協調性評価理由
+    updateThisTimeValues[0][10] = selfAssessmentData.strengthenElement // 改善・強化マインド要素
+    updateThisTimeValues[0][11] = selfAssessmentData.strengthenAction // 改善・強化tryAction
+  }
+
+  // 更新データをスプレッドシートに反映する
+  lasTimeRange.setValues(updateThisTimeValues)
+  learnEagernessReasonRange.setValue('') // 学習意欲評価理由
+  openReasonRange.setValue('') // オープン評価理由
+  competenceReasonRange.setValue('') // 言語力評価理由
+  subjectiveReasonRange.setValue('') // 主体性評価理由
+  harmonyReasonRange.setValue('') // 協調性評価理由
+  strengthenElementRange.setValue('') // 改善・強化マインド要素
+  strengthenActionRange.setValue('') // 改善・強化tryAction
+  midtermReviewRange.setValue('') // 中間ふりかえり
 }
 
 /**
