@@ -12,6 +12,7 @@
     <v-main>
       <v-container fluid>
         <book-app />
+        <List />
       </v-container>
     </v-main>
   </v-app>
@@ -19,11 +20,11 @@
 
 <script lang="js">
 import Vue from 'vue'
-import BookApp from '@/view/BookApp'
+import List from '@/components/List'
 
 export default Vue.extend({
   components: {
-    BookApp
+    List
   },
   data () {
     return {}
