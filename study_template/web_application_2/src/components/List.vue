@@ -22,14 +22,17 @@ export default {
       headers: [
         {
           text: 'タイトル',
-          align: 'start',
-          sortable: false,
+          // align: 'start',
+          // sortable: false,
           value: 'name'
         },
         { text: 'ジャンル', value: 'genre' },
         { text: '購入日', value: 'purchaseDate' },
         { text: '購入者', value: 'purchaser' },
-        { text: '削除／修正', value: 'actions' }
+        { text: '削除／修正',
+          align: 'center',
+          sortable: false,
+          value: 'actions' }
       ],
       books: [
         {
