@@ -19,8 +19,6 @@
 export default {
   data () {
     return {
-      singleSelect: false,
-      selected: [],
       headers: [
         {
           text: 'タイトル',
