@@ -1,11 +1,16 @@
 <template>
   <div>
-    書籍管理アプリだよ
+    <List />
   </div>
 </template>
 
 <script>
+import List from '@/components/List'
+
 export default {
+  components: {
+    List
+  },
   data () {
     return {}
   },
