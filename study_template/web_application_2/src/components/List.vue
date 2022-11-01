@@ -29,8 +29,7 @@ export default {
         { text: 'ジャンル', value: 'genre' },
         { text: '購入日', value: 'purchaseDate' },
         { text: '購入者', value: 'purchaser' },
-        { text: 'レビュー', value: 'review' },
-        { text: '削除', value: 'actions' }
+        { text: '削除／修正', value: 'actions' }
       ],
       books: [
         {
@@ -38,7 +37,6 @@ export default {
           genre: '文学・評論',
           purchaseDate: '2021/11/27',
           purchaser: '井上陽水',
-          review: '人生が二度あれば',
           actions: true
         },
         {
@@ -46,7 +44,6 @@ export default {
           genre: 'ノンフィクション',
           purchaseDate: '2021/11/29',
           purchaser: '稲垣潤一',
-          review: '夏のクラクション',
           actions: false
         },
         {
@@ -54,7 +51,6 @@ export default {
           genre: 'ビジネス・経済',
           purchaseDate: '2021/12/20',
           purchaser: '藤井フミヤ',
-          review: 'TRUE LOVE',
           actions: false
         },
         {
@@ -62,7 +58,6 @@ export default {
           genre: '歴史・地理',
           purchaseDate: '2021/12/31',
           purchaser: '斉藤和義',
-          review: '歌うたいのバラッド',
           actions: false
         },
         {
@@ -70,7 +65,6 @@ export default {
           genre: '政治・社会',
           purchaseDate: '2021/12/31',
           purchaser: '来生たかお',
-          review: '夢の途中',
           actions: false
         },
         {
@@ -78,7 +72,6 @@ export default {
           genre: '芸能・エンタメ',
           purchaseDate: '2022/1/1',
           purchaser: '吉田拓郎',
-          review: 'どうしてこんなに悲しいんだろう',
           actions: false
         },
         {
@@ -86,7 +79,6 @@ export default {
           genre: '芸術・デザイン',
           purchaseDate: '2022/1/10',
           purchaser: '松山千春',
-          review: '大空と大地の中で',
           actions: false
         },
         {
@@ -94,7 +86,6 @@ export default {
           genre: '人文・思想・宗教',
           purchaseDate: '2022/1/15',
           purchaser: '松任谷由実',
-          review: 'やさしさに包まれたなら',
           actions: false
         },
         {
@@ -102,7 +93,6 @@ export default {
           genre: '暮らし・健康',
           purchaseDate: '2022/2/3',
           purchaser: '松田聖子',
-          review: '野ばらのエチュード',
           actions: false
         },
         {
@@ -110,7 +100,6 @@ export default {
           genre: 'サイエンス・テクノロジー',
           purchaseDate: '2022/2/8',
           purchaser: '槇原敬之',
-          review: 'もう恋なんてしない',
           actions: false
         },
         {
@@ -118,7 +107,6 @@ export default {
           genre: '趣味・実用',
           purchaseDate: '2022/2/22',
           purchaser: '浜田省吾',
-          review: '愛の世代の前に',
           actions: false
         },
         {
@@ -126,7 +114,6 @@ export default {
           genre: '教育・自己啓発',
           purchaseDate: '2022/3/4',
           purchaser: '中島みゆき',
-          review: 'いけてると思う',
           actions: false
         },
         {
@@ -134,7 +121,6 @@ export default {
           genre: 'スポーツ・アウトドア',
           purchaseDate: '2022/4/30',
           purchaser: '山下達郎',
-          review: 'なかなかじゃない',
           actions: false
         },
         {
@@ -142,7 +128,6 @@ export default {
           genre: '辞典・ことば',
           purchaseDate: '2022/5/5',
           purchaser: '竹内まりや',
-          review: 'ありだと思います',
           actions: false
         },
         {
@@ -150,7 +135,6 @@ export default {
           genre: '音楽',
           purchaseDate: '2022/8/17',
           purchaser: '織田哲郎',
-          review: '楽しかった',
           actions: false
         },
         {
@@ -158,7 +142,6 @@ export default {
           genre: '旅行・紀行',
           purchaseDate: '2022/8/23',
           purchaser: '原由子',
-          review: '実に感動しました',
           actions: false
         },
         {
@@ -166,7 +149,6 @@ export default {
           genre: '絵本・児童書',
           purchaseDate: '2022/10/9',
           purchaser: '桑田佳祐',
-          review: 'やっぱ、最高です',
           actions: false
         },
         {
@@ -174,7 +156,6 @@ export default {
           genre: 'コミックス',
           purchaseDate: '2022/10/13',
           purchaser: '小田和正',
-          review: '大変、おもしろい',
           actions: false
         }
       ]
