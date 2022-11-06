@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <v-text-field
-            v-model="message3"
+            v-model="searchTitle"
             filled
             label="タイトル"
             clearable
@@ -13,13 +13,14 @@
         </v-col>
         <v-col>
           <v-select
+            v-model="searchGenres"
             :items="items"
             filled
             label="ジャンル"
             clearable
           >
             <template v-slot:append-outer>
-              <v-btn
+              <v-btn @click="searchBook"
                 small
                 color="secondary">検索
               </v-btn>
@@ -34,6 +35,29 @@
 <script>
 export default {
   data: () => ({
+    searchTitle: '',
+    searchGenres: [
+      '文学・評論',
+      'ノンフィクション',
+      'ビジネス・経済',
+      '歴史・地理',
+      '政治・社会',
+      '芸能・エンタメ',
+      '芸術・デザイン',
+      '人文・思想・宗教',
+      '暮らし・健康',
+      'サイエンス・テクノロジー',
+      '趣味・実用',
+      '教育・自己啓発',
+      'スポーツ・アウトドア',
+      '辞典・ことば',
+      '音楽',
+      '旅行・紀行',
+      '絵本・児童書',
+      'コミックス'
+    ],
+    // itemsを別に定義しないとクリア後の再選択ができない
+    // 前回選択した（バインドされた）ものだけが表示される
     items: [
       '文学・評論',
       'ノンフィクション',
@@ -57,6 +81,22 @@ export default {
   }),
   created () {},
   computed: {},
-  methods: {}
+  methods: {
+    searchBook () {
+      // 検索入力の状態をチェックします
+      if (!this.searchTitle) {
+        // 空文字もしくはnullはエラー
+        // クリア後に再度未入力だとnullになる
+        alert('タイトルを入力してください。')
+      } else if (typeof this.searchGenres !== 'string') {
+        // 選択する前は'object'(メニュー全て)がバインドされる
+        // 選択後にクリアすると'undefined'がバインドされる
+        alert('ジャンルを選択してください。')
+      }
+      alert('正しく入力されました。検索を開始します。')
+      // DBを検索します
+      // BookAppに検索結果を受け渡します
+    }
+  }
 }
 </script>
