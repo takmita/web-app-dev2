@@ -19,11 +19,7 @@
           </v-text-field>
         </v-col>
 
-        <v-col
-          class="d-flex"
-          cols="12"
-          sm="6"
-        >
+        <v-col>
           <v-select
             :items="items"
             filled
