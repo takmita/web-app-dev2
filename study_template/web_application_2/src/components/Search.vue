@@ -28,7 +28,7 @@
             :items="items"
             filled
             label="ジャンル"
-            clearable=true
+            clearable
           >
             <template v-slot:append-outer>
               <v-btn
