@@ -1,7 +1,6 @@
 <template>
   <v-form>
     <v-container>
-      <!-- <v-row align-content:start> -->
       <v-row>
         <v-col>
           <v-text-field
@@ -10,15 +9,8 @@
             label="タイトル"
             clearable
           >
-            <template v-slot:append>
-              <v-btn
-                small
-                color="primary">検索
-              </v-btn>
-            </template>
           </v-text-field>
         </v-col>
-
         <v-col>
           <v-select
             :items="items"
