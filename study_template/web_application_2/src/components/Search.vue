@@ -13,7 +13,7 @@
         </v-col>
         <v-col>
           <v-select
-            v-model="searchGenres"
+            v-model="searchGenre"
             :items="items"
             filled
             label="ジャンル"
@@ -22,7 +22,7 @@
             <template v-slot:append-outer>
               <v-btn @click="searchBook"
                 small
-                color="secondary">検索
+                color="primary">検索
               </v-btn>
             </template>
           </v-select>
@@ -37,10 +37,9 @@ import { selectBook } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
-    searchGenres: selectBook,
-    // itemsを別に定義しないとクリア後の再選択ができない
-    // 前回選択した（バインドされた）ものだけが表示される
-    items: selectBook
+    searchGenre: '',
+    items: selectBook,
+    searchResult: []
   }),
   created () {},
   computed: {},
@@ -51,15 +50,26 @@ export default {
         // 空文字もしくはnullはエラー
         // クリア後に再度未入力だとnullになる
         alert('タイトルを入力してください。')
-      } else if (typeof this.searchGenres !== 'string') {
-        // 選択する前は'object'(メニュー全て)がバインドされる
-        // 選択後にクリアすると'undefined'がバインドされる
+      } else if (!this.searchGenre) {
+        // 空文字もしくはnullはエラー
+        // クリア後に再度未入力だとnullになる
         alert('ジャンルを選択してください。')
       } else {
         alert('正しく入力されました。検索を開始します。')
+        // DBを検索します
+        // BookAppに検索結果を受け渡します
+        this.$emit('search-book', (
+          this.searchResult.push = (
+            {
+              name: 'うまくいっている人の考え方',
+              genre: 'ビジネス・経済',
+              purchaseDate: '2021/12/20',
+              purchaser: '藤井フミヤ',
+              actions: false
+            }
+          )
+        ))
       }
-      // DBを検索します
-      // BookAppに検索結果を受け渡します
     }
   }
 }

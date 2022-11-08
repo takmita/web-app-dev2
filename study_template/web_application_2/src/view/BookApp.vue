@@ -1,7 +1,15 @@
 <template>
   <div>
-    <Search />
-    <List />
+    <!-- 受け取ったSearch-bookイベントをsearchBookで定義する -->
+    <Search
+      @search-book="searchBook"
+    >
+    </Search>
+    <!-- List.vueに検索結果を受け渡す -->
+    <List
+      :bookList="bookList"
+    >
+    </List>
   </div>
 </template>
 
@@ -15,10 +23,18 @@ export default {
     List
   },
   data () {
-    return {}
+    return {
+      bookList: {}
+    }
   },
   created () {},
   computed: {},
-  methods: {}
+  methods: {
+    // searchBook.vueからの戻り値を
+    // data部を経由してList.vueに受け渡す
+    searchBook (result) {
+      this.bookList = result
+    }
+  }
 }
 </script>
