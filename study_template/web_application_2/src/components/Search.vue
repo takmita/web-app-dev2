@@ -46,29 +46,36 @@ export default {
   methods: {
     searchBook () {
       // 検索入力の状態をチェックします
+      if (!this.searchValidation()) {
+        return
+      }
+      // DBを検索します
+      // BookAppに検索結果を受け渡します
+      this.$emit('search-book', (
+        this.searchResult.push = (
+          {
+            name: 'うまくいっている人の考え方',
+            genre: 'ビジネス・経済',
+            purchaseDate: '2021/12/20',
+            purchaser: '藤井フミヤ',
+            actions: false
+          }
+        )
+      ))
+    },
+    searchValidation () {
+      // 検索入力の状態をチェックします
+      // 空文字もしくはnullはエラー
+      // クリア後に再度未入力だとnullになる
       if (!this.searchTitle) {
-        // 空文字もしくはnullはエラー
-        // クリア後に再度未入力だとnullになる
         alert('タイトルを入力してください。')
+        return false
       } else if (!this.searchGenre) {
-        // 空文字もしくはnullはエラー
-        // クリア後に再度未入力だとnullになる
         alert('ジャンルを選択してください。')
+        return false
       } else {
         alert('正しく入力されました。検索を開始します。')
-        // DBを検索します
-        // BookAppに検索結果を受け渡します
-        this.$emit('search-book', (
-          this.searchResult.push = (
-            {
-              name: 'うまくいっている人の考え方',
-              genre: 'ビジネス・経済',
-              purchaseDate: '2021/12/20',
-              purchaser: '藤井フミヤ',
-              actions: false
-            }
-          )
-        ))
+        return true
       }
     }
   }
