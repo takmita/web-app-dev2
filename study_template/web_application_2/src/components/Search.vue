@@ -44,8 +44,10 @@ export default {
   created () {},
   computed: {},
   methods: {
+    /**
+     * 検索入力の状態をチェックします
+     */
     searchBook () {
-      // 検索入力の状態をチェックします
       if (!this.searchValidation()) {
         return
       }
@@ -63,20 +65,20 @@ export default {
         )
       ))
     },
+    /**
+     * 検索入力の空文字もしくはnullをチェックします
+     */
     searchValidation () {
-      // 検索入力の状態をチェックします
-      // 空文字もしくはnullはエラー
-      // クリア後に再度未入力だとnullになる
       if (!this.searchTitle) {
         alert('タイトルを入力してください。')
         return false
-      } else if (!this.searchGenre) {
+      }
+      if (!this.searchGenre) {
         alert('ジャンルを選択してください。')
         return false
-      } else {
-        alert('正しく入力されました。検索を開始します。')
-        return true
       }
+      alert('正しく入力されました。検索を開始します。')
+      return true
     }
   }
 }
