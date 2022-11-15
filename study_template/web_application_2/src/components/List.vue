@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="bookList"
+      :items="books"
       class="elevation-1"
     >
       <template v-slot:[`item.actions`]="{ item }">
@@ -33,28 +33,11 @@ export default {
           align: 'center',
           sortable: false,
           value: 'actions' }
-      ],
-      bookList: ''
+      ]
     }
   },
-  // 検索結果を検知しリストに表示する
-  watch: {
-    books: function () {
-      this.setTable()
-    }
-  },
-  created () {
-    // 全データ（配列）を初期表示する
-    this.setTable()
-  },
+  created () {},
   computed: {},
-  methods: {
-    /**
-     * data tableの表示エリアにセットする
-     */
-    setTable () {
-      this.bookList = this.books
-    }
-  }
+  methods: {}
 }
 </script>
