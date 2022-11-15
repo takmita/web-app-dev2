@@ -82,10 +82,12 @@ export default {
         alert('タイトルを入力してください。')
         return false
       }
+
       if (!this.searchGenre) {
         alert('ジャンルを選択してください。')
         return false
       }
+
       alert('正しく入力されました。検索を開始します。')
       return true
     }
