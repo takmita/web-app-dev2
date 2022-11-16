@@ -13,7 +13,7 @@
         </v-col>
         <v-col>
           <v-select
-            v-model="searchGenres"
+            v-model="searchGenre"
             :items="items"
             filled
             label="ジャンル"
@@ -22,7 +22,7 @@
             <template v-slot:append-outer>
               <v-btn @click="searchBook"
                 small
-                color="secondary">検索
+                color="primary">検索
               </v-btn>
             </template>
           </v-select>
@@ -37,29 +37,59 @@ import { selectBook } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
-    searchGenres: selectBook,
-    // itemsを別に定義しないとクリア後の再選択ができない
-    // 前回選択した（バインドされた）ものだけが表示される
-    items: selectBook
+    searchGenre: '',
+    items: selectBook,
+    searchResult: '',
+    obtainedBooks: []
   }),
   created () {},
   computed: {},
   methods: {
+    /**
+     * 検索入力の状態をチェックします
+     */
     searchBook () {
-      // 検索入力の状態をチェックします
-      if (!this.searchTitle) {
-        // 空文字もしくはnullはエラー
-        // クリア後に再度未入力だとnullになる
-        alert('タイトルを入力してください。')
-      } else if (typeof this.searchGenres !== 'string') {
-        // 選択する前は'object'(メニュー全て)がバインドされる
-        // 選択後にクリアすると'undefined'がバインドされる
-        alert('ジャンルを選択してください。')
-      } else {
-        alert('正しく入力されました。検索を開始します。')
+      if (!this.searchValidation()) {
+        return
       }
       // DBを検索します
+      this.obtainedBooks.push(
+        {
+          name: 'うまくいっている人の考え方',
+          genre: 'ビジネス・経済',
+          purchaseDate: '2021/12/20',
+          purchaser: '藤井フミヤ',
+          actions: false
+        },
+        {
+          name: '中曽根康弘が語る戦後日本外交',
+          genre: '政治・社会',
+          purchaseDate: '2021/12/31',
+          purchaser: '来生たかお',
+          actions: false
+        }
+      )
       // BookAppに検索結果を受け渡します
+      this.$emit('search-book', (
+        this.searchResult = this.obtainedBooks
+      ))
+    },
+    /**
+     * 検索入力の空文字もしくはnullをチェックします
+     */
+    searchValidation () {
+      if (!this.searchTitle) {
+        alert('タイトルを入力してください。')
+        return false
+      }
+
+      if (!this.searchGenre) {
+        alert('ジャンルを選択してください。')
+        return false
+      }
+
+      alert('正しく入力されました。検索を開始します。')
+      return true
     }
   }
 }
