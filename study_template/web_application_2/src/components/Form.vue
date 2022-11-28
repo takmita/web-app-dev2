@@ -1,8 +1,8 @@
 <template>
+  <p>{{}}</p>
 </template>
 
 <script>
-import { selectBook } from '@/modules/constants'
 export default {
   data: () => ({}),
   created () {},

@@ -1,9 +1,5 @@
 <template>
   <div>
-    <Form
-      @add-form="addForm"
-    >
-    </Form>
     <!-- 受け取ったSearch-bookイベントをsearchBookで定義する -->
     <Search
       @search-book="searchBook"
@@ -20,11 +16,9 @@
 <script>
 import Search from '@/components/Search'
 import List from '@/components/List'
-import Form from '@/components/Form'
 
 export default {
   components: {
-    Form,
     Search,
     List
   },

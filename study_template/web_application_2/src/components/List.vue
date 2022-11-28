@@ -5,6 +5,7 @@
     class="elevation-1"
   >
     <template v-slot:top>
+      <!-- 登録と修正の入力フォーム -->
       <v-dialog
         v-model="dialog"
         persistent
@@ -17,12 +18,12 @@
             v-on="on"
             v-bind="attrs"
           >
-            Add Book
+            Add to Book
           </v-btn>
         </template>
         <v-card>
           <v-card-title>
-            <!-- 修正画面と共有する -->
+            <!-- 登録と修正の画面を共有する -->
             <span class="text-h5">{{ formTitle }}</span>
           </v-card-title>
           <v-card-text>
@@ -100,7 +101,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
+      <!-- 削除する際の確認ダイアログ -->
       <v-dialog v-model="dialogDelete" max-width="500px">
         <v-card>
           <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
@@ -113,6 +114,7 @@
         </v-card>
       </v-dialog>
     </template>
+    <!-- 修正と削除のアイコンボタン -->
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon
         small
@@ -127,14 +129,6 @@
       >
         mdi-delete
       </v-icon>
-    </template>
-    <template v-slot:no-data>
-      <v-btn
-        color="primary"
-        @click="initialize"
-      >
-        Reset
-      </v-btn>
     </template>
   </v-data-table>
 </template>
