@@ -1,14 +1,10 @@
 <template>
-  <div>
-   登録、更新するよ
-  </div>
 </template>
 
 <script>
+import { selectBook } from '@/modules/constants'
 export default {
-  data () {
-    return {}
-  },
+  data: () => ({}),
   created () {},
   computed: {},
   methods: {}
