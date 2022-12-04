@@ -55,20 +55,17 @@ export default {
       // DBを検索します
       this.obtainedBooks.push(
         {
-          sequentialNumber: '003',
           title: 'うまくいっている人の考え方',
           genre: 'ビジネス・経済',
-          purchaseDate: '2021/12/20',
-          purchaser: '藤井フミヤ',
-          actions: false
+          purchaseDate: '2021-12-20',
+          purchaser: '藤井フミヤ'
         },
         {
           sequentialNumber: '005',
           title: '中曽根康弘が語る戦後日本外交',
           genre: '政治・社会',
-          purchaseDate: '2021/12/31',
-          purchaser: '来生たかお',
-          actions: false
+          purchaseDate: '2021-12-31',
+          purchaser: '来生たかお'
         }
       )
       // BookAppに検索結果を受け渡します
