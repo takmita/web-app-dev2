@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import { selectBook } from '@/modules/constants'
+import { selectGenre } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
     searchGenre: '',
-    items: selectBook,
+    items: selectGenre,
     searchResult: '',
     obtainedBooks: []
   }),

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog
-      v-model="dialog"
+      v-model="dialogAdd"
       persistent
       max-width="600px"
     >
@@ -38,7 +38,7 @@
               >
                 <v-select
                   v-model="editedItem.genre"
-                  :items="items"
+                  :items="selectGenre"
                   filled
                   label="分類"
                   clearable
@@ -127,15 +127,15 @@
 </template>
 
 <script>
-import { selectBook } from '@/modules/constants'
+import { selectGenre } from '@/modules/constants'
 export default {
   name: 'List',
   props: ['books'],
   data () {
     return {
-      dialog: false,
+      dialogAdd: false,
       dialogDelete: false,
-      items: selectBook,
+      selectGenre: selectGenre,
       headers: [
         { text: 'タイトル', value: 'title' },
         { text: 'ジャンル', value: 'genre' },
@@ -188,7 +188,7 @@ export default {
      * editedIndexに"booksに該当なし"(-1)をセット
      */
     close () {
-      this.dialog = false
+      this.dialogAdd = false
       this.nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
@@ -202,7 +202,7 @@ export default {
     editItem (item) {
       this.editedIndex = this.books.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.dialog = true
+      this.dialogAdd = true
     },
     /**
      * editedIndexにbooksに含まれるitemの位置をセット
