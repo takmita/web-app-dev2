@@ -189,7 +189,7 @@ export default {
      */
     close () {
       this.dialogAdd = false
-      this.nextTick(() => {
+      this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       })
@@ -211,7 +211,6 @@ export default {
      */
     deleteItem (item) {
       this.editedIndex = this.books.indexOf(item)
-      this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
     /**
@@ -230,7 +229,7 @@ export default {
      */
     closeDelete () {
       this.dialogDelete = false
-      this.nextTick(() => {
+      this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       })
