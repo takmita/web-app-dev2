@@ -4,7 +4,6 @@
       v-model="dialog"
       persistent
       max-width="600px"
-      dense
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -24,10 +23,9 @@
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-row>
+            <v-row dense>
               <v-col
-                cols="18"
-                sm="6"
+                cols="6"
               >
                 <v-text-field
                   v-model="editedItem.title"
@@ -36,8 +34,7 @@
                 ></v-text-field>
               </v-col>
               <v-col
-                cols="18"
-                sm="6"
+                cols="6"
               >
                 <v-select
                   v-model="editedItem.genre"
@@ -48,8 +45,7 @@
                 ></v-select>
               </v-col>
               <v-col
-                cols="18"
-                sm="6"
+                cols="6"
               >
                 <v-text-field
                   v-model="editedItem.purchaser"
