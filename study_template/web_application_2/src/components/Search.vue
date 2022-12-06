@@ -7,7 +7,7 @@
             v-model="searchTitle"
             filled
             label="タイトル"
-            clearable6
+            clearable
           >
           </v-text-field>
         </v-col>
