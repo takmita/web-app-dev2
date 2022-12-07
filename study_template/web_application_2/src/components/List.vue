@@ -11,7 +11,8 @@
           dark
           class="mb-2"
           v-bind="attrs"
-           v-on="on"
+          v-on="on"
+          editedIndex="-1"
         >
           Add to Book
         </v-btn>
@@ -162,10 +163,10 @@ export default {
   },
   created () {},
   computed: {
-    // 登録はeditedIndexが「テーブルに該当なし(-1)」
-    // 修正はeditedIndexが「テーブルにある対象の行番号」
+    // 登録はeditedIndexが無し(-1)「テーブルに該当データなし」
+    // 修正はeditedIndexが有り(対象データ位置）「テーブルに該当データあり」
     formTitle () {
-      return this.editedIndex === -1 ? '登録用画面' : '修正用画面'
+      return this.isAddMode() ? '登録用画面' : '修正用画面'
     }
   },
   methods: {
@@ -175,27 +176,26 @@ export default {
      * 最後にダイアログを閉じる
      */
     save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.books[this.editedIndex], this.editedItem)
-      } else {
+      if (this.isAddMode()) {
         this.books.push(this.editedItem)
+      } else {
+        Object.assign(this.books[this.editedIndex], this.editedItem)
       }
       this.close()
     },
     /**
      * ダイアログを非表示にする
      * editedItemに空のitemを返す
-     * editedIndexに"booksに該当なし"(-1)をセット
      */
     close () {
       this.dialogAdd = false
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
       })
+      this.resetAddMode()
     },
     /**
-     * editedIndexにbooksに含まれるitemの位置をセット
+     * editedIndexにbooksの中で修正するitemの位置をセット
      * editedItemにitemを返す
      * 削除ダイアログを表示(true)する
      */
@@ -205,12 +205,11 @@ export default {
       this.dialogAdd = true
     },
     /**
-     * editedIndexにbooksに含まれるitemの位置をセット
-     * editedItemにitemを返す
+     * deleteIndexにbooksの中で削除するitemの位置をセット
      * 削除ダイアログを表示(true)する
      */
     deleteItem (item) {
-      this.editedIndex = this.books.indexOf(item)
+      this.deleteIndex = this.books.indexOf(item)
       this.dialogDelete = true
     },
     /**
@@ -218,21 +217,32 @@ export default {
      * 削除ダイアログを閉じる
      */
     deleteItemConfirm () {
-      this.books.splice(this.editedIndex, 1)
+      this.books.splice(this.deleteIndex, 1)
       this.closeDelete()
     },
     /**
      * 削除確認でCancelなら削除ダイアログを非表示にする
      * 削除確認でOKの場合も削除ダイアログを非表示にする
      * editedItemに空のitemを返す
-     * editedIndexに"booksに該当なし"(-1)をセット
      */
     closeDelete () {
       this.dialogDelete = false
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
       })
+    },
+    /**
+     * 登録の場合にtrueを返します
+     */
+    isAddMode () {
+      return this.editedIndex === -1
+    },
+    /**
+     * 修正後にインデックスをリセットすることで
+     * 再度、登録を可能とします
+     */
+    resetAddMode () {
+      this.editedIndex = -1
     }
   }
 }
