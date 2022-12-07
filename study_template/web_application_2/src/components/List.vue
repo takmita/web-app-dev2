@@ -190,9 +190,8 @@ export default {
     close () {
       this.dialogAdd = false
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
+        this.resetDialog()
       })
-      this.resetAddMode()
     },
     /**
      * editedIndexにbooksの中で修正するitemの位置をセット
@@ -228,7 +227,7 @@ export default {
     closeDelete () {
       this.dialogDelete = false
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
+        this.resetDialog()
       })
     },
     /**
@@ -241,7 +240,8 @@ export default {
      * 修正後にインデックスをリセットすることで
      * 再度、登録を可能とします
      */
-    resetAddMode () {
+    resetDialog () {
+      this.editedItem = Object.assign({}, this.defaultItem)
       this.editedIndex = -1
     }
   }
