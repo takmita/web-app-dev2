@@ -64,73 +64,73 @@ export default {
       {
         title: 'ちあきなおみ　沈黙の理由',
         genre: '芸能・エンタメ',
-        purchaseDate: '2022-1-1',
+        purchaseDate: '2022-01-01',
         purchaser: '吉田拓郎'
       },
       {
         title: '謎解き　フェルメール',
         genre: '芸術・デザイン',
-        purchaseDate: '2022-1-10',
+        purchaseDate: '2022-01-10',
         purchaser: '松山千春'
       },
       {
         title: 'カントの人間学',
         genre: '人文・思想・宗教',
-        purchaseDate: '2022-1-15',
+        purchaseDate: '2022-01-15',
         purchaser: '松任谷由実'
       },
       {
         title: 'おやこレシピ',
         genre: '暮らし・健康',
-        purchaseDate: '2022-2-3',
+        purchaseDate: '2022-02-03',
         purchaser: '松田聖子'
       },
       {
         title: 'フェルマーの最終定理',
         genre: 'サイエンス・テクノロジー',
-        purchaseDate: '2022-2-8',
+        purchaseDate: '2022-02-08',
         purchaser: '槇原敬之'
       },
       {
         title: 'やきもの鑑定入門',
         genre: '趣味・実用',
-        purchaseDate: '2022-2-22',
+        purchaseDate: '2022-02-22',
         purchaser: '浜田省吾'
       },
       {
         title: '受験脳の作り方―脳科学で考える効率的学習法―',
         genre: '教育・自己啓発',
-        purchaseDate: '2022-3-4',
+        purchaseDate: '2022-03-04',
         purchaser: '中島みゆき'
       },
       {
         title: '百年前の山を旅する',
         genre: 'スポーツ・アウトドア',
-        purchaseDate: '2022-4-30',
+        purchaseDate: '2022-04-30',
         purchaser: '山下達郎'
       },
       {
         title: '新潮日本語漢字辞典',
         genre: '辞典・ことば',
-        purchaseDate: '2022-5-5',
+        purchaseDate: '2022-05-05',
         purchaser: '竹内まりや'
       },
       {
         title: '小澤征爾さんと、音楽について話をする',
         genre: '音楽',
-        purchaseDate: '2022-8-17',
+        purchaseDate: '2022-08-17',
         purchaser: '織田哲郎'
       },
       {
         title: 'ロシア日記―シベリア鉄道に乗って―',
         genre: '旅行・紀行',
-        purchaseDate: '2022-8-23',
+        purchaseDate: '2022-08-23',
         purchaser: '原由子'
       },
       {
         title: '思い出のマーニー',
         genre: '絵本・児童書',
-        purchaseDate: '2022-10-9',
+        purchaseDate: '2022-10-09',
         purchaser: '桑田佳祐'
       },
       {

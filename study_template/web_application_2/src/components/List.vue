@@ -164,10 +164,19 @@ export default {
   },
   created () {},
   computed: {
-    // 登録はeditedIndexが無し(-1)「テーブルに該当データなし」
-    // 修正はeditedIndexが有り(対象データ位置）「テーブルに該当データあり」
+    /**
+     * タイトルの表示を切り替えます
+     */
     formTitle () {
-      return this.isAddMode() ? '登録用画面' : '修正用画面'
+      return this.isAddMode ? '登録用画面' : '修正用画面'
+    },
+    /**
+     * 登録の場合にtrueを返します
+     * 登録はeditedIndexが無し(-1)「テーブルに該当データなし」
+     * 修正はeditedIndexが有り(対象データ位置）「テーブルに該当データあり」
+     */
+    isAddMode () {
+      return this.editedIndex === -1
     }
   },
   methods: {
@@ -230,12 +239,6 @@ export default {
       this.$nextTick(() => {
         this.resetDialog()
       })
-    },
-    /**
-     * 登録の場合にtrueを返します
-     */
-    isAddMode () {
-      return this.editedIndex === -1
     },
     /**
      * 修正後にインデックスをリセットすることで

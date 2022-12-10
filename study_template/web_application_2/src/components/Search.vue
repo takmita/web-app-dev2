@@ -57,7 +57,7 @@ export default {
         {
           title: 'うまくいっている人の考え方',
           genre: 'ビジネス・経済',
-          purchaseDate: '2021-12-20',
+          purchaseDate: '2021-12-02',
           purchaser: '藤井フミヤ'
         },
         {
