@@ -145,6 +145,7 @@ export default {
         { text: '修正／削除', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
+      deleteIndex: -1,
       editedItem: {
         title: '',
         genre: '',
