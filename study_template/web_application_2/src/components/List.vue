@@ -39,7 +39,7 @@
               >
                 <v-select
                   v-model="editedItem.genre"
-                  :items="selectGenre"
+                  :items="genres"
                   filled
                   label="分類"
                   clearable
@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { selectGenre } from '@/modules/constants'
+import { genres } from '@/modules/constants'
 export default {
   name: 'List',
   props: ['books'],
@@ -136,7 +136,7 @@ export default {
     return {
       dialogAdd: false,
       dialogDelete: false,
-      selectGenre: selectGenre,
+      genres: genres,
       headers: [
         { text: 'タイトル', value: 'title' },
         { text: 'ジャンル', value: 'genre' },

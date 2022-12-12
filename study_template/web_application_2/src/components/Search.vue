@@ -14,7 +14,7 @@
         <v-col>
           <v-select
             v-model="searchGenre"
-            :items="selectGenre"
+            :items="genres"
             filled
             label="ジャンル"
             clearable
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import { selectGenre } from '@/modules/constants'
+import { genres } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
     searchGenre: '',
-    selectGenre: selectGenre,
+    genres: genres,
     searchResult: '',
     obtainedBooks: []
   }),
