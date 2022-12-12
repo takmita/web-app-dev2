@@ -21,7 +21,6 @@
           >
             <template v-slot:append-outer>
               <v-btn @click="searchBook"
-                small
                 color="primary">Search Book
               </v-btn>
             </template>
@@ -39,8 +38,8 @@ export default {
     searchTitle: '',
     searchGenre: '',
     genres: genres,
-    searchResult: '',
-    obtainedBooks: []
+    obtainedBooks: [],
+    searchResult: ''
   }),
   created () {},
   computed: {},
