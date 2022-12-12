@@ -14,7 +14,7 @@
         <v-col>
           <v-select
             v-model="searchGenre"
-            :items="items"
+            :items="selectGenre"
             filled
             label="ジャンル"
             clearable
@@ -22,7 +22,7 @@
             <template v-slot:append-outer>
               <v-btn @click="searchBook"
                 small
-                color="primary">検索
+                color="primary">Search Book
               </v-btn>
             </template>
           </v-select>
@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import { selectBook } from '@/modules/constants'
+import { selectGenre } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
     searchGenre: '',
-    items: selectBook,
+    selectGenre: selectGenre,
     searchResult: '',
     obtainedBooks: []
   }),
@@ -55,18 +55,17 @@ export default {
       // DBを検索します
       this.obtainedBooks.push(
         {
-          name: 'うまくいっている人の考え方',
+          title: 'うまくいっている人の考え方',
           genre: 'ビジネス・経済',
-          purchaseDate: '2021/12/20',
-          purchaser: '藤井フミヤ',
-          actions: false
+          purchaseDate: '2021-12-02',
+          purchaser: '藤井フミヤ'
         },
         {
-          name: '中曽根康弘が語る戦後日本外交',
+          sequentialNumber: '005',
+          title: '中曽根康弘が語る戦後日本外交',
           genre: '政治・社会',
-          purchaseDate: '2021/12/31',
-          purchaser: '来生たかお',
-          actions: false
+          purchaseDate: '2021-12-31',
+          purchaser: '来生たかお'
         }
       )
       // BookAppに検索結果を受け渡します

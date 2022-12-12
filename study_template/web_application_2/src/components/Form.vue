@@ -1,14 +1,10 @@
 <template>
-  <div>
-   登録、更新するよ
-  </div>
+  <p>{{}}</p>
 </template>
 
 <script>
 export default {
-  data () {
-    return {}
-  },
+  data: () => ({}),
   created () {},
   computed: {},
   methods: {}
