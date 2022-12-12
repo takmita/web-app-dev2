@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog
-      v-model="dialogAdd"
+      v-model="showDialogAdd"
       persistent
       max-width="600px"
     >
@@ -91,7 +91,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogDelete" max-width="500px">
+    <v-dialog v-model="showDialogDelete" max-width="500px">
       <v-card>
         <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
         <v-card-actions>
@@ -134,8 +134,8 @@ export default {
   props: ['books'],
   data () {
     return {
-      dialogAdd: false,
-      dialogDelete: false,
+      showDialogAdd: false,
+      showDialogDelete: false,
       genres: genres,
       headers: [
         { text: 'タイトル', value: 'title' },
@@ -198,7 +198,7 @@ export default {
      * editedItemに空のitemを返す
      */
     close () {
-      this.dialogAdd = false
+      this.showDialogAdd = false
       this.$nextTick(() => {
         this.resetEditedItem()
       })
@@ -211,7 +211,7 @@ export default {
     editItem (item) {
       this.editedIndex = this.books.indexOf(item)
       this.editedItem = Object.assign({}, item)
-      this.dialogAdd = true
+      this.showDialogAdd = true
     },
     /**
      * deleteIndexにbooksの中で削除するitemの位置をセット
@@ -219,7 +219,7 @@ export default {
      */
     deleteItem (item) {
       this.deleteIndex = this.books.indexOf(item)
-      this.dialogDelete = true
+      this.showDialogDelete = true
     },
     /**
      * 削除確認でOKならbooksから削除(splice)する
@@ -235,7 +235,7 @@ export default {
      * editedItemに空のitemを返す
      */
     closeDelete () {
-      this.dialogDelete = false
+      this.showDialogDelete = false
       this.$nextTick(() => {
         this.resetEditedItem()
       })
