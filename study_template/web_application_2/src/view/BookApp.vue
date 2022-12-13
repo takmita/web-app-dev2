@@ -7,9 +7,10 @@
     </Search>
 
     <!-- 変更後のbooksをFormから受け取る -->
-    <!-- 変更前のbookデータをFormに受け渡す -->
+    <!-- 変更前のbooksデータをFormに受け渡す -->
     <Form
       @afterEditing-books="afterEditingBooks"
+      @dialog-status="dialogStatus"
       :books="books"
       :showDialogAdd="showDialogAdd"
       :showDialogDelete="showDialogDelete"
@@ -177,6 +178,12 @@ export default {
      */
     afterEditingBooks (result) {
       this.books = result
+    },
+    /**
+     * Form.vueからdialogの状態を受け取る
+     */
+    dialogStatus (...args) {
+      [this.editedItem, this.editedIndex, this.showDialogAdd, this.showDialogDelete] = args
     },
     /**
      * List.vueから編集するItemの情報を受け取る

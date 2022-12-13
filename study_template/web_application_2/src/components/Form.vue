@@ -167,18 +167,20 @@ export default {
      * editedItemに空のitemを返す
      */
     close () {
-      this.$nextTick(() => {
-        this.resetEditedItem()
-      })
+      this.resetEditedItem()
     },
     /**
      * 修正後にインデックスをリセットすることで
      * 再度、登録を可能とします
      */
     resetEditedItem () {
+      // this.editedItem = Object.assign({}, this.defaultItem)
+      this.editedItem = this.defaultItem
       this.editedIndex = -1
       this.showDialogAdd = false
       this.showDialogDelete = false
+      // dialogの初期状態をBookAppに通知します
+      this.$emit('dialog-status', this.editedItem, this.editedIndex, this.showDialogAdd, this.showDialogDelete)
     },
     /**
       * 削除確認でOKならbooksから対象データを削除する
@@ -192,9 +194,7 @@ export default {
      * 削除確認でCancelなら削除せずダイアログを非表示にする
      */
     closeDelete () {
-      this.$nextTick(() => {
-        this.resetEditedItem()
-      })
+      this.resetEditedItem()
     }
   }
 }
