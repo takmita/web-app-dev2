@@ -1,13 +1,29 @@
 <template>
   <div>
-    <!-- 受け取ったSearch-bookイベントをsearchBookで定義する -->
+    <!-- 検索したbooksをSearchから受け取る -->
     <Search
       @search-book="searchBook"
     >
     </Search>
 
-    <!-- 表示するbookデータをListコンポーネントに連携する -->
+    <!-- 変更後のbooksをFormから受け取る -->
+    <!-- 変更前のbooksデータをFormに受け渡す -->
+    <Form
+      @afterEditing-books="afterEditingBooks"
+      @dialog-status="dialogStatus"
+      :books="books"
+      :showDialogAdd="showDialogAdd"
+      :showDialogDelete="showDialogDelete"
+      :editedIndex="editedIndex"
+      :deleteIndex="deleteIndex"
+      :editedItem="editedItem"
+    ></Form>
+
+    <!-- 修正削除を選択したItemをListから受け取る -->
+    <!-- 表示するbookデータをListに連携する -->
     <List
+      @edited-BookInfo="editedBookInfo"
+      @delete-BookInfo="deleteBookInfo"
       :books="books"
     >
     </List>
@@ -16,15 +32,22 @@
 
 <script>
 import Search from '@/components/Search'
+import Form from '@/components/Form.vue'
 import List from '@/components/List'
 export default {
   components: {
     Search,
+    Form,
     List
   },
   data () {
     return {
-      books: []
+      books: [],
+      showDialogAdd: false,
+      showDialogDelete: false,
+      editedItem: '',
+      editedIndex: -1,
+      deleteIndex: -1
     }
   },
   created () {
@@ -149,6 +172,30 @@ export default {
      */
     searchBook (result) {
       this.books = result
+    },
+    /**
+     * Form.vueから編集削除後のbooksを受け取る
+     */
+    afterEditingBooks (result) {
+      this.books = result
+    },
+    /**
+     * Form.vueからdialogの状態を受け取る
+     */
+    dialogStatus (...args) {
+      [this.editedItem, this.editedIndex, this.showDialogAdd, this.showDialogDelete] = args
+    },
+    /**
+     * List.vueから編集するItemの情報を受け取る
+     */
+    editedBookInfo (...args) {
+      [this.editedIndex, this.editedItem, this.showDialogAdd, this.showDialogDelete] = args
+    },
+    /**
+     * List.vueから削除するItemの情報を受け取る
+     */
+    deleteBookInfo (...args) {
+      [this.deleteIndex, this.showDialogAdd, this.showDialogDelete] = args
     }
   }
 }

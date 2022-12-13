@@ -14,14 +14,13 @@
         <v-col>
           <v-select
             v-model="searchGenre"
-            :items="selectGenre"
+            :items="genres"
             filled
             label="ジャンル"
             clearable
           >
             <template v-slot:append-outer>
               <v-btn @click="searchBook"
-                small
                 color="primary">Search Book
               </v-btn>
             </template>
@@ -33,14 +32,14 @@
 </template>
 
 <script>
-import { selectGenre } from '@/modules/constants'
+import { genres } from '@/modules/constants'
 export default {
   data: () => ({
     searchTitle: '',
     searchGenre: '',
-    selectGenre: selectGenre,
-    searchResult: '',
-    obtainedBooks: []
+    genres: genres,
+    obtainedBooks: [],
+    searchResult: ''
   }),
   created () {},
   computed: {},
